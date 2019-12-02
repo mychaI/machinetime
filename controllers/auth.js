@@ -1,4 +1,5 @@
 const db = require('../db');
+const env = require('../config/env');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
