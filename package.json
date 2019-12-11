@@ -4,7 +4,11 @@
   "description": "Reserve time on shop machines, like the CNC",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"unset HOST && npm run client\""
   },
   "keywords": [
     "calendar",
@@ -24,5 +28,7 @@
     "express": "^4.17.1",
     "pg": "^7.14.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "concurrently": "^5.0.1"
+  }
 }
