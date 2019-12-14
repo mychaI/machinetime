@@ -10,17 +10,12 @@ router.get("/test", (req, res) => {
   });
 });
 
-router.post(
-  "/signup",
-  passport.authenticate("jwt", { session: false }),
-  authController.createUser,
-  (req, res, next) => {
-    res.json({
-      confirmation: "user successfully created",
-      username: res.locals.username
-    });
-  }
-);
+router.post("/signup", authController.createUser, (req, res, next) => {
+  res.json({
+    confirmation: "user successfully created",
+    username: res.locals.username
+  });
+});
 
 router.post("/login", authController.loginUser, (req, res, next) => {
   res.json({
@@ -28,11 +23,16 @@ router.post("/login", authController.loginUser, (req, res, next) => {
   });
 });
 
-router.put("/update", authController.updateUser, (req, res, next) => {
-  res.json({
-    confirmation: "user successfully updated",
-    fields: res.locals.fields
-  });
-});
+router.put(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  authController.updateUser,
+  (req, res, next) => {
+    res.json({
+      confirmation: "user successfully updated",
+      fields: res.locals.fields
+    });
+  }
+);
 
 module.exports = router;
