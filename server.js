@@ -32,5 +32,10 @@ const authRouter = require("./routes/auth");
 app.use("/", index);
 app.use("/auth", authRouter);
 
+// Serve main entry point for all unknown route requests
+app.get('/*', function(req, res) {
+  res.render(path.join(__dirname, 'views', 'index.ejs'));
+});
+
 // Bootstrap server
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
