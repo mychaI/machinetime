@@ -52,8 +52,23 @@ module.exports = {
           if (err) return next({ err });
           if (result) {
             // Create JWT payload
+            const payload = {
+              email: email
+            };
 
-            return next();
+            // Expires in 86400 seconds = 1440 minutes = 24 hours
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 86400 },
+              (err, token) => {
+                if (err) return next(err);
+                else {
+                  res.locals.token = token;
+                  return next();
+                }
+              }
+            );
           } else {
             res.status(403).json({ invalid_auth: "Invalid email or password" });
           }
