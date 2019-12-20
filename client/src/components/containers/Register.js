@@ -35,6 +35,7 @@ class Register extends Component {
 		<div className='login'>
 		  <div className='container'>
 			<h1>Register a new account</h1>
+			<p>Sign up now</p>
 			<form onSubmit={this.onSubmit}>
 			  <input type='email' value={this.state.email} onChange={this.onChange}  />
 
