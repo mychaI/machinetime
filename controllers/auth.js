@@ -1,6 +1,6 @@
 const db = require("../db");
 const env = require("../config/env");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const keys = require("./../config/keys");
