@@ -9,7 +9,7 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Home } from '@material-ui/icons';
+import { Home, AccountBox, Create } from '@material-ui/icons';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
 const primary = blueGrey[500];
@@ -21,16 +21,15 @@ const Navbar = props => {
 	<>
 	  <AppBar color='primary' position='static'>
 		<Toolbar>
-		  <TypoGraphy variant='title' color='inherit'>
+		  <TypoGraphy variant='h5' color='inherit'>
 			MachineTime
 		  </TypoGraphy>
 
 		  <List component='nav'>
 			<ListItem component='div'>
 
-
 			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='title'>
+				<TypoGraphy color='inherit' variant='h5'>
 				  <Link to='/'>
 					Home <Home />
 				  </Link>
@@ -38,13 +37,20 @@ const Navbar = props => {
 			  </ListItemText>
 
 			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='title'>
-				  <Link to='/'>
-					Log In	
+				<TypoGraphy color='inherit' variant='h5'>
+				  <Link to='/login'>
+					Log In <AccountBox />
 				  </Link>
 				</TypoGraphy>
 			  </ListItemText>
 
+			  <ListItemText inset>
+				<TypoGraphy color='inherit' variant='h5'>
+				  <Link to='/signup'>
+					Sign Up <Create />
+				  </Link>
+				</TypoGraphy>
+			  </ListItemText>
 
 			</ListItem>
 		  </List>
