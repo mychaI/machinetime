@@ -65,6 +65,7 @@ module.exports = {
                 if (err) return next(err);
                 else {
                   res.locals.token = token;
+                  console.log(token);
                   return next();
                 }
               }
