@@ -1,6 +1,7 @@
 node_modules
 config
 DBscripts
+client/public/dist/
 *.swp
 *.swo
 *~

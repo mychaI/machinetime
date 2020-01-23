@@ -1,32 +1,38 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const passport = require("passport");
 
 // Controllers
-const authController = require('../controllers/auth');
+const authController = require("../controllers/auth");
 
-router.get('/test', (req, res) => {
+router.get("/test", (req, res) => {
   res.json({
-	confirmation: 'success'
+    confirmation: "success"
   });
 });
 
-router.post('/signup', authController.createUser, (req, res, next) => {
+router.post("/signup", authController.createUser, (req, res, next) => {
   res.json({
-	confirmation: 'user successfully created',
-	username: res.locals.username
+    confirmation: "user successfully created",
+    username: res.locals.username
   });
 });
 
-router.post('/login', authController.loginUser, (req, res, next) => {
+router.post("/login", authController.loginUser, (req, res, next) => {
   res.json({
-	confirmation: 'user successfully logged in',
+    confirmation: "user successfully logged in"
   });
 });
 
-router.put('/update', authController.updateUser, (req, res, next) => {
-  res.json({
-	confirmation: 'user successfully updated',
-	fields: res.locals.fields
-  });
-});
+router.put(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  authController.updateUser,
+  (req, res, next) => {
+    res.json({
+      confirmation: "user successfully updated",
+      fields: res.locals.fields
+    });
+  }
+);
 
 module.exports = router;
