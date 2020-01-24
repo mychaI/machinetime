@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
+import { TextField, Button } from '@material-ui/core';
 
 const Login = () => {
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+
+  const [state, setState] = useState({
+	email: '',
+	password: '',
+  });
+
+  const updateField = e => {
+	setState({
+	  ...state,
+	  [e.target.name] : e.target.value
+	});
+  };
 
   const printValues = e => {
-	e.preventDefault();
-	console.log(email, password);
+	console.log('hi', state.email, state.password);
   };
 
   return (
@@ -15,7 +25,9 @@ const Login = () => {
 	    <div className='container'>
 		  <h1>Log in to your account</h1>
 		  <form>
-		    <input type='email' name='email' placeholder='Email' />
+		    <TextField label='Email' variant='outlined' name='email' type='email' onChange={updateField} />
+			<TextField label='Password' variant='outlined' name='password' type='password' onChange={updateField} />
+			<Button variant='contained' color='primary'  onClick={printValues}>Submit</Button>
 		  </form>
 		</div>
 	  </div>
