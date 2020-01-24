@@ -1,53 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
+import { TextField, Button } from '@material-ui/core';
 
-class Register extends Component {
-  constructor() {
-	super();
-	this.state = {
-	  email: '',
-	  password: '',
-	  name: '',
-	  phone: '',
-	  errors: {}
-	}
+const Register = () => {
+  const [state, setState] = useState({
+	email: '',
+	password: '',
+	password2: '',
+	firstName: '',
+	lastName: '',
+	phone: '',
+  });
 
-  }
+  const updateField = e => {
+	setState({
+	  ...state,
+	  [e.target.name]: e.target.value
+	});
+  };
 
-  onChange(e) {
-	this.setState({ [e.target.name] : e.target.value });
-  }
+  const submitHandler = () => {
+	console.log('state ', state);
+  };
 
-  onSubmit(e) {
-	e.preventDefault();
-	const newUser = {
-	  email: this.state.email,
-	  password: this.state.password,
-	  name: this.state.name,
-	  phone: this.state.phone
-	}
-	console.log(newUser);
-  }
-	  
+  return (
+    <>
+	  <div className='auth'>
+	    <div className='container'>
+		  <h1>Register a new account</h1>
+		  <p>Sign up now</p>
+		  <TextField label='First Name' variant='outlined' name='firstName' value={state.firstName} onChange={updateField} />
+		  <TextField label='Last Name' variant='outlined' name='lastName' value={state.lastName} onChange={updateField} />
+		  <TextField label='Email' variant='outlined' name='email' value={state.email} onChange={updateField} />
+		  <TextField label='Password' variant='outlined' name='password' value={state.password} onChange={updateField} />
+		  <TextField label='Confirm Password' variant='outlined' name='password2' value={state.password2} onChange={updateField} />
+		  <Button variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
+		  
 
-  render() {
-	return (
-	  <>
-		<div className='login'>
-		  <div className='container'>
-			<h1>Register a new account</h1>
-			<p>Sign up now</p>
-			<form onSubmit={this.onSubmit}>
-			  <input type='email' value={this.state.email} onChange={this.onChange}  />
-
-			</form>
-
-		  </div>
 		</div>
-
-	  </>
-
-	)
-  }
+	  </div>
+	</>
+  )
 }
 
 export default Register;
