@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 
 const Login = () => {
@@ -27,7 +28,9 @@ const Login = () => {
 		  <form>
 		    <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
 			<TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
-			<Button variant='contained' color='primary'  onClick={printValues}>Submit</Button>
+			
+			<Button variant='contained' className='auth-button' color='primary'  onClick={printValues}>Submit</Button>
+			<Link to='/register' className='alt-auth'>Create a new account</Link>
 		  </form>
 		</div>
 	  </div>

@@ -26,3 +26,12 @@ html, body {
   display: block !important;
   margin-bottom: 10px !important;
 }
+
+.auth-button {
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+
+.alt-auth {
+  text-decoration: none;
+}
