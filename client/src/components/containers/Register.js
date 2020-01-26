@@ -24,15 +24,15 @@ const Register = () => {
 
   return (
     <>
-	  <div className='auth'>
-	    <div className='container'>
+	  <div className='container'>
+	    <div className='auth'>
 		  <h1>Register a new account</h1>
 		  <p>Sign up now</p>
-		  <TextField label='First Name' variant='outlined' name='firstName' value={state.firstName} onChange={updateField} />
-		  <TextField label='Last Name' variant='outlined' name='lastName' value={state.lastName} onChange={updateField} />
-		  <TextField label='Email' variant='outlined' name='email' value={state.email} onChange={updateField} />
-		  <TextField label='Password' variant='outlined' name='password' value={state.password} onChange={updateField} />
-		  <TextField label='Confirm Password' variant='outlined' name='password2' value={state.password2} onChange={updateField} />
+		  <TextField label='First Name' className='input' fullWidth variant='outlined' name='firstName' value={state.firstName} onChange={updateField} />
+		  <TextField label='Last Name' className='input' fullWidth variant='outlined' name='lastName' value={state.lastName} onChange={updateField} />
+		  <TextField label='Email' className='input' fullWidth variant='outlined' name='email' value={state.email} onChange={updateField} />
+		  <TextField label='Password' className='input' fullWidth variant='outlined' name='password' value={state.password} onChange={updateField} />
+		  <TextField label='Confirm Password' className='input' fullWidth variant='outlined' name='password2' value={state.password2} onChange={updateField} />
 		  <Button variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 		  
 

@@ -21,12 +21,12 @@ const Login = () => {
 
   return (
     <>
-	  <div className='login'>
-	    <div className='container'>
+	  <div className='container'>
+	    <div className='auth'>
 		  <h1>Log in to your account</h1>
 		  <form>
-		    <TextField label='Email' variant='outlined' name='email' type='email' onChange={updateField} />
-			<TextField label='Password' variant='outlined' name='password' type='password' onChange={updateField} />
+		    <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
+			<TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
 			<Button variant='contained' color='primary'  onClick={printValues}>Submit</Button>
 		  </form>
 		</div>
