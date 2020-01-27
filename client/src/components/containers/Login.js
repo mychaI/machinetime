@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -17,7 +18,11 @@ const Login = () => {
   };
 
   const printValues = e => {
-	console.log('hi', state.email, state.password);
+
+	axios.post('/auth/login', state)
+		  // TODO: store token from response in Context
+		 .then( res => console.log(res.data))
+		 .catch( err => console.log('Error ', err));
   };
 
   return (
