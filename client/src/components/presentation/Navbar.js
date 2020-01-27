@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
   links: {
 	color: '#fff',
-	fontSize: '16px',
+	fontSize: '20px',
 	fontFamily: 'roboto',
 	textDecoration: 'none',
   }
@@ -36,7 +36,7 @@ const Navbar = props => {
 	<>
 	  <AppBar className={classes.navbar} position='static'>
 		<Toolbar>
-		  <TypoGraphy variant='title' className={classes.title}>
+		  <TypoGraphy variant='h1' className={classes.title}>
 			MachineTime
 		  </TypoGraphy>
 
@@ -45,7 +45,7 @@ const Navbar = props => {
 
 
 			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='title'>
+				<TypoGraphy color='inherit' variant='subtitle1'>
 				  <Link to='/' className={classes.links}>
 					Home <Home />
 				  </Link>
@@ -53,7 +53,7 @@ const Navbar = props => {
 			  </ListItemText>
 
 			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='title'>
+				<TypoGraphy color='inherit' variant='subtitle1'>
 				  <Link to='/login' className={classes.links}>
 					Log In <LockOpen /> 	
 				  </Link>
@@ -61,7 +61,7 @@ const Navbar = props => {
 			  </ListItemText>
 
 			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='title'>
+				<TypoGraphy color='inherit' variant='subtitle1'>
 				  <Link to='/register' className={classes.links}>
 				     Register <Edit />
 				  </Link>

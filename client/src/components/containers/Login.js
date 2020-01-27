@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
+
+// Import Context
+import { AuthContext } from '../../Auth';
 
 const Login = () => {
 
@@ -10,6 +13,8 @@ const Login = () => {
 	password: '',
   });
 
+  const authContext = useContext(AuthContext);
+
   const updateField = e => {
 	setState({
 	  ...state,
@@ -17,11 +22,13 @@ const Login = () => {
 	});
   };
 
-  const printValues = e => {
-
+  const submitForm = e => {
 	axios.post('/auth/login', state)
 		  // TODO: store token from response in Context
-		 .then( res => console.log(res.data))
+		 .then( res => { 
+		   console.log(res.data);
+		   authContext.setToken(res.data.token);
+		 })
 		 .catch( err => console.log('Error ', err));
   };
 
@@ -34,7 +41,7 @@ const Login = () => {
 		    <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
 			<TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
 			
-			<Button variant='contained' className='auth-button' color='primary'  onClick={printValues}>Submit</Button>
+			<Button variant='contained' className='auth-button' color='primary'  onClick={submitForm}>Submit</Button>
 			<Link to='/register' className='alt-auth'>Create a new account</Link>
 		  </form>
 		</div>

@@ -5,6 +5,7 @@ module.exports = {
 	sourceMapFilename: '../public/dist/bundle.map'
   },
   devtool: '#source-map',
+  mode: 'development',
   module: {
 	rules: [
 	  {
