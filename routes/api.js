@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const passport = require('passport');
 
 // Controllers
 const apiController = require('../controllers/api');
@@ -35,7 +36,7 @@ router.get('/:id', apiController.getReservationById, (req, res, next) => {
  @desc		Add a new reservations
  @access	Private	
 */
-router.post('/new', apiController.makeReservation, (req, res, next) => {
+router.post('/new', passport.authenticate('jwt', { session: false }), apiController.makeReservation, (req, res, next) => {
   res.json({
 	confirmation: 'successfully made a reservation',
 	resrvation: res.locals.reservation

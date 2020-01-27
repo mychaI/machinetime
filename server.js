@@ -27,10 +27,12 @@ app.use("/public", express.static(path.resolve(__dirname, "./client/public")));
 // Route handlers
 const index = require("./routes/index");
 const authRouter = require("./routes/auth");
+const apiRouter = require('./routes/api');
 
 // Routes
 app.use("/", index);
 app.use("/auth", authRouter);
+app.use("/api", apiRouter);
 
 // Serve main entry point for all unknown route requests
 app.get('/*', function(req, res) {

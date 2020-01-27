@@ -12,14 +12,16 @@ router.get("/test", (req, res) => {
 
 router.post("/signup", authController.createUser, (req, res, next) => {
   res.json({
-    confirmation: "user successfully created",
-    username: res.locals.username
+    confirmation: "User successfully created",
+    username: res.locals.username,
+	message: "Please sign in with your newly account"
   });
 });
 
 router.post("/login", authController.loginUser, (req, res, next) => {
   res.json({
-    confirmation: "user successfully logged in"
+    confirmation: "User successfully logged in",
+	token: res.locals.token
   });
 });
 

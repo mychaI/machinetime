@@ -64,8 +64,7 @@ module.exports = {
               (err, token) => {
                 if (err) return next(err);
                 else {
-                  res.locals.token = token;
-                  console.log(token);
+                  res.locals.token = 'Bearer ' + token;
                   return next();
                 }
               }
