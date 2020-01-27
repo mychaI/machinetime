@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
+import axios from 'axios';
 
 const Register = () => {
   const [state, setState] = useState({
@@ -20,7 +21,19 @@ const Register = () => {
   };
 
   const submitHandler = () => {
-	console.log('state ', state);
+	// TODO: update DB table so it accepts first and last name separately
+	const newUser = {
+	  email: state.email,
+	  password: state.password,
+	  name: state.lastName,
+	  phone: state.phone
+	};
+
+	console.log('posting ', newUser);
+	// TODO: input validation
+	axios.post('/auth/register', newUser)
+		 .then( res =>  <Redirect to='/login' />)
+		 .catch( err => console.log('Error ', err));
   };
 
   return (
@@ -31,11 +44,11 @@ const Register = () => {
 		  <p>Sign up now</p>
 		  <TextField label='First Name' className='input' fullWidth variant='outlined' name='firstName' value={state.firstName} onChange={updateField} />
 		  <TextField label='Last Name' className='input' fullWidth variant='outlined' name='lastName' value={state.lastName} onChange={updateField} />
-		  <TextField label='Email' className='input' fullWidth variant='outlined' name='email' value={state.email} onChange={updateField} />
-		  <TextField label='Password' className='input' fullWidth variant='outlined' name='password' value={state.password} onChange={updateField} />
-		  <TextField label='Confirm Password' className='input' fullWidth variant='outlined' name='password2' value={state.password2} onChange={updateField} />
+		  <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' value={state.email} onChange={updateField} />
+		  <TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' value={state.password} onChange={updateField} />
+		  <TextField label='Confirm Password' className='input' fullWidth variant='outlined' name='password2' type='password' value={state.password2} onChange={updateField} />
 		  <Button variant='contained' className='auth-button' color='primary' onClick={submitHandler}>Submit</Button>
-		  <Link to='/login' classname='alt-auth'>Log in with existing account</Link>		  
+		  <Link to='/login' className='alt-auth'>Log in with existing account</Link>		  
 		</div>
 	  </div>
 	</>

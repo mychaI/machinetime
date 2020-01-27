@@ -24,9 +24,8 @@ const Login = () => {
 
   const submitForm = e => {
 	axios.post('/auth/login', state)
-		  // TODO: store token from response in Context
 		 .then( res => { 
-		   console.log(res.data);
+		   console.log('User data saved to context');
 		   authContext.setToken(res.data.token);
 		 })
 		 .catch( err => console.log('Error ', err));

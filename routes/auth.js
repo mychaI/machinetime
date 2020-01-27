@@ -10,7 +10,7 @@ router.get("/test", (req, res) => {
   });
 });
 
-router.post("/signup", authController.createUser, (req, res, next) => {
+router.post("/register", authController.createUser, (req, res, next) => {
   res.json({
     confirmation: "User successfully created",
     username: res.locals.username,
