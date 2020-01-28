@@ -1,9 +1,9 @@
 import React, { useState} from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
 
-const Register = () => {
+const Register = props => {
   const [state, setState] = useState({
 	email: '',
 	password: '',
@@ -32,7 +32,10 @@ const Register = () => {
 	console.log('posting ', newUser);
 	// TODO: input validation
 	axios.post('/auth/register', newUser)
-		 .then( res =>  <Redirect to='/login' />)
+		 .then( res =>  {
+		   //throw popup saying please login with newly created user
+		   props.history.push('/login');
+		 })
 		 .catch( err => console.log('Error ', err));
   };
 
@@ -55,4 +58,4 @@ const Register = () => {
   )
 }
 
-export default Register;
+export default withRouter(Register);
