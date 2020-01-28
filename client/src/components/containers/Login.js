@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 // Import Context
 import { AuthContext } from '../../Auth';
@@ -26,7 +27,10 @@ const Login = props => {
 	axios.post('/auth/login', state)
 		 .then( res => { 
 		   console.log('User data saved to context');
-		   authContext.setToken(res.data.token);
+		   const token = res.data.token;
+		   localStorage.setItem('jwt', token);
+		   const decoded = jwt_decode(token);
+		   authContext.setUser(decoded);
 		   props.history.push('/');
 		 })
 		 .catch( err => console.log('Error ', err));
