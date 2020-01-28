@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
 
 // Import Context
 import { AuthContext } from '../../Auth';
 
-const Login = () => {
+const Login = props => {
 
   const [state, setState] = useState({
 	email: '',
@@ -27,6 +27,7 @@ const Login = () => {
 		 .then( res => { 
 		   console.log('User data saved to context');
 		   authContext.setToken(res.data.token);
+		   props.history.push('/');
 		 })
 		 .catch( err => console.log('Error ', err));
   };
@@ -49,5 +50,4 @@ const Login = () => {
   )
 }
 
-export default Login;
-
+export default withRouter(Login);
