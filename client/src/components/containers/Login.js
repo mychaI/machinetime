@@ -31,6 +31,7 @@ const Login = props => {
 		   localStorage.setItem('jwt', token);
 		   const decoded = jwt_decode(token);
 		   authContext.setUser(decoded);
+		   localStorage.setItem('user', JSON.stringify(decoded));
 		   props.history.push('/');
 		 })
 		 .catch( err => console.log('Error ', err));
