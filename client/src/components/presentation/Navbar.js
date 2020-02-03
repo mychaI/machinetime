@@ -68,6 +68,14 @@ const Navbar = props => {
 				</TypoGraphy>
 			  </ListItemText>
 
+			  <ListItemText inset>
+				<TypoGraphy color='inherit' variant='subtitle1'>
+				  <Link to='/profile' className={classes.links}>
+				     Profile
+				  </Link>
+				</TypoGraphy>
+			  </ListItemText>
+
 			</ListItem>
 		  </List>
 		</Toolbar>
