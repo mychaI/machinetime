@@ -34,6 +34,46 @@ const Navbar = props => {
 
   const guestLinks = (
 	<>
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/login' className={classes.links}>
+			Log In <LockOpen /> 	
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/register' className={classes.links}>
+			 Register <Edit />
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+	</>
+  );
+
+  const authLinks = (
+	<>
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/profile' className={classes.links}>
+			 Profile
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/calendar' className={classes.links}>
+			Calendar 
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+	</>
+  );
+
+  return (
+	<>
 	  <AppBar className={classes.navbar} position='static'>
 		<Toolbar>
 		  <TypoGraphy variant='h1' className={classes.title}>
@@ -51,55 +91,15 @@ const Navbar = props => {
 				  </Link>
 				</TypoGraphy>
 			  </ListItemText>
-
-			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/login' className={classes.links}>
-					Log In <LockOpen /> 	
-				  </Link>
-				</TypoGraphy>
-			  </ListItemText>
-
-			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/register' className={classes.links}>
-				     Register <Edit />
-				  </Link>
-				</TypoGraphy>
-			  </ListItemText>
-
-			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/profile' className={classes.links}>
-				     Profile
-				  </Link>
-				</TypoGraphy>
-			  </ListItemText>
+			
+			  {guestLinks}
 
 			</ListItem>
 		  </List>
 		</Toolbar>
 	  </AppBar>
 	</>
-  );
 
-  const authLinks = (
-	<ul className='navbar-nav'>
-	  <li className='nav-item'>
-		<Link className='nav-link' to='/profile'>Profile</Link>
-	  </li>
-	  <li className='navbar-nav'>
-		<Link className='nav-link' to='/reserve'>Reserve</Link>
-	  </li>
-	</ul>
-  );
-
-  return (
-	<>
-	  {guestLinks}
-
-
-	</>
   )
 
 };
