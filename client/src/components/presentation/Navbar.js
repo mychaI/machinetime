@@ -12,7 +12,7 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Home, LockOpen, Edit, Event, AccountBoxk, Schedule } from '@material-ui/icons';
+import { Home, LockOpen, Edit, Event, AccountBox, Schedule } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   navbar: {
