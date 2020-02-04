@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { AuthContext } from '../../Auth';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +12,7 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Home, LockOpen, Edit } from '@material-ui/icons';
+import { Home, LockOpen, Edit, Event, AccountBoxk, Schedule } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   navbar: {
@@ -31,6 +33,9 @@ const useStyles = makeStyles({
 
 const Navbar = props => {
   const classes = useStyles();
+
+  const { user } = useContext(AuthContext);
+  console.log('user', user);
 
   const guestLinks = (
 	<>
@@ -57,15 +62,15 @@ const Navbar = props => {
 	  <ListItemText inset>
 		<TypoGraphy color='inherit' variant='subtitle1'>
 		  <Link to='/profile' className={classes.links}>
-			 Profile
+			 Profile <AccountBox />
 		  </Link>
 		</TypoGraphy>
 	  </ListItemText>
 
 	  <ListItemText inset>
 		<TypoGraphy color='inherit' variant='subtitle1'>
-		  <Link to='/calendar' className={classes.links}>
-			Calendar 
+		  <Link to='/reserve' className={classes.links}>
+			Reserve <Schedule />
 		  </Link>
 		</TypoGraphy>
 	  </ListItemText>
@@ -83,7 +88,6 @@ const Navbar = props => {
 		  <List component='nav'>
 			<ListItem component='div'>
 
-
 			  <ListItemText inset>
 				<TypoGraphy color='inherit' variant='subtitle1'>
 				  <Link to='/' className={classes.links}>
@@ -91,8 +95,16 @@ const Navbar = props => {
 				  </Link>
 				</TypoGraphy>
 			  </ListItemText>
+
+			  <ListItemText inset>
+				<TypoGraphy color='inherit' variant='subtitle1'>
+				  <Link to='/calendar' className={classes.links}>
+					Calendar  <Event />
+				  </Link>
+				</TypoGraphy>
+			  </ListItemText>
 			
-			  {guestLinks}
+			  {user ? authLinks : guestLinks}
 
 			</ListItem>
 		  </List>

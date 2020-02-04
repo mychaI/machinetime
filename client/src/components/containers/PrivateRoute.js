@@ -4,13 +4,10 @@ import { AuthContext } from '../../Auth';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const {user} = useContext(AuthContext);
-  console.log(user);
   let validUser;
 
   if (user) {
 	validUser = !!user.email && user.exp < Date.now();
-	console.log('email', user.email, 'exp', user.exp);
-	console.log(RouteComponent);
   }
 
   return (
