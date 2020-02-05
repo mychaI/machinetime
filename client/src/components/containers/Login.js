@@ -30,6 +30,7 @@ const Login = props => {
 		   const token = res.data.token;
 		   localStorage.setItem('jwt', token);
 		   const decoded = jwt_decode(token);
+		   console.log('decoded', decoded);
 		   authContext.setUser(decoded);
 		   localStorage.setItem('user', JSON.stringify(decoded));
 		   props.history.push('/');

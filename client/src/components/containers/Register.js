@@ -21,15 +21,15 @@ const Register = props => {
   };
 
   const submitHandler = () => {
-	// TODO: update DB table so it accepts first and last name separately
 	const newUser = {
 	  email: state.email,
 	  password: state.password,
-	  name: state.lastName,
+	  firstName: state.firstName,
+	  lastName: state.lastName,
 	  phone: state.phone
 	};
 
-	console.log('posting ', newUser);
+	//console.log('posting ', newUser);
 	// TODO: input validation
 	axios.post('/auth/register', newUser)
 		 .then( res =>  {
@@ -47,6 +47,7 @@ const Register = props => {
 		  <p>Sign up now</p>
 		  <TextField label='First Name' className='input' fullWidth variant='outlined' name='firstName' value={state.firstName} onChange={updateField} />
 		  <TextField label='Last Name' className='input' fullWidth variant='outlined' name='lastName' value={state.lastName} onChange={updateField} />
+		  <TextField label='Phone' className='input' fullWidth variant='outlined' name='phone' type='tel' value={state.phone} onChange={updateField} />
 		  <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' value={state.email} onChange={updateField} />
 		  <TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' value={state.password} onChange={updateField} />
 		  <TextField label='Confirm Password' className='input' fullWidth variant='outlined' name='password2' type='password' value={state.password2} onChange={updateField} />

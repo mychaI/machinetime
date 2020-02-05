@@ -8,22 +8,23 @@ const passport = require("passport");
 
 module.exports = {
   createUser: (req, res, next) => {
-    const { email, password, name, phone } = req.body;
+    const { email, password, firstName, lastName, phone } = req.body;
 
     const createString = `
-	  INSERT INTO users (email, password, name, phone)
-	  VALUES ($1, $2, $3, $4)
+	  INSERT INTO users (email, password, first_name, last_name, phone)
+	  VALUES ($1, $2, $3, $4, $5)
 	`;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
       if (err) return next({ err });
-      db.query(createString, [email, hash, name, phone])
+      db.query(createString, [email, hash, firstName, lastName, phone])
         .then(data => {
-          res.locals.email = email;
+		  res.locals.email = email;
+          res.locals.firstName = firstName;
           return next();
         })
         .catch(err => {
-          if (env === "dev") console.log("Error saving user: ", err);
+          console.log("Error saving user: ", err);
           return next({ err });
         });
     });
@@ -33,7 +34,7 @@ module.exports = {
     const { email, password } = req.body;
 
     const queryString = `
-	  SELECT email, password 
+	  SELECT email, password, first_name, last_name, phone
 	  FROM users
 	  WHERE email = $1
 	`;
@@ -45,7 +46,9 @@ module.exports = {
             invalid_auth: "Invalid email or password"
           });
         }
-        res.locals.email = data.rows[0].email;
+        const firstName = data.rows[0].first_name;
+        const lastName = data.rows[0].last_name;
+        const phone = data.rows[0].phone;
         const hashed_password = data.rows[0].password;
 
         bcrypt.compare(password, hashed_password, (err, result) => {
@@ -53,7 +56,10 @@ module.exports = {
           if (result) {
             // Create JWT payload
             const payload = {
-              email: email
+			  firstName,
+			  lastName,
+			  phone,
+              email
             };
 
             // Expires in 86400 seconds = 1440 minutes = 24 hours
