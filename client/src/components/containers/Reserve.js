@@ -30,7 +30,12 @@ const Reserve = props => {
 
   const submitForm = e => {
 	//console.log('submitting the following res ', authContext.user, reservation);
-	console.log(machine);
+	const newReservation = {
+	  machine,
+	  date
+	// TODO: add user's first and last name to reservation
+	};
+	console.log('new reservation ', newReservation);
   }
 
 
@@ -49,7 +54,9 @@ const Reserve = props => {
 			))}
 		  </Select>
 		  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-		    <DatePicker value={date} onChange={setDate} className='input' />
+		    <InputLabel id='date-select'>Date</InputLabel>
+		    <DatePicker value={date} minDate={Date.now()} onChange={setDate} className='input' />
+		    <InputLabel id='time-select'>Time</InputLabel>
 			<TimePicker value={date} onChange={setDate} className='input' />
 		  </MuiPickersUtilsProvider>
 		  <Button variant='contained' className='auth-button' color='primary' onClick={submitForm}>Reserve</Button>
