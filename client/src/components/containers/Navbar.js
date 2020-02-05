@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AuthContext } from '../Auth';
 
+import { AuthContext } from '../../Auth';
+
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +13,7 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Home, LockOpen, Edit } from '@material-ui/icons';
+import { Home, LockOpen, Edit, Event, AccountBox, Schedule } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   navbar: {
@@ -33,9 +35,49 @@ const useStyles = makeStyles({
 const Navbar = props => {
   const classes = useStyles();
 
-  const authContext = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const guestLinks = (
+	<>
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/login' className={classes.links}>
+			Log In <LockOpen /> 	
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/register' className={classes.links}>
+			 Register <Edit />
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+	</>
+  );
+
+  const authLinks = (
+	<>
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/profile' className={classes.links}>
+			 Profile <AccountBox />
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+
+	  <ListItemText inset>
+		<TypoGraphy color='inherit' variant='subtitle1'>
+		  <Link to='/reserve' className={classes.links}>
+			Reserve <Schedule />
+		  </Link>
+		</TypoGraphy>
+	  </ListItemText>
+	</>
+  );
+
+  return (
 	<>
 	  <AppBar className={classes.navbar} position='static'>
 		<Toolbar>
@@ -45,7 +87,6 @@ const Navbar = props => {
 
 		  <List component='nav'>
 			<ListItem component='div'>
-
 
 			  <ListItemText inset>
 				<TypoGraphy color='inherit' variant='subtitle1'>
@@ -57,52 +98,20 @@ const Navbar = props => {
 
 			  <ListItemText inset>
 				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/login' className={classes.links}>
-					Log In <LockOpen /> 	
+				  <Link to='/calendar' className={classes.links}>
+					Calendar  <Event />
 				  </Link>
 				</TypoGraphy>
 			  </ListItemText>
-
-			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/register' className={classes.links}>
-				     Register <Edit />
-				  </Link>
-				</TypoGraphy>
-			  </ListItemText>
-
-			  <ListItemText inset>
-				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/profile' className={classes.links}>
-				     Profile
-				  </Link>
-				</TypoGraphy>
-			  </ListItemText>
+			
+			  {user ? authLinks : guestLinks}
 
 			</ListItem>
 		  </List>
 		</Toolbar>
 	  </AppBar>
 	</>
-  );
 
-  const authLinks = (
-	<ul className='navbar-nav'>
-	  <li className='nav-item'>
-		<Link className='nav-link' to='/profile'>Profile</Link>
-	  </li>
-	  <li className='navbar-nav'>
-		<Link className='nav-link' to='/reserve'>Reserve</Link>
-	  </li>
-	</ul>
-  );
-
-  return (
-	<>
-	  {guestLinks}
-
-
-	</>
   )
 
 };
