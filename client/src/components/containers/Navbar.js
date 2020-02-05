@@ -72,16 +72,16 @@ const Navbar = props => {
 	<>
 	  <ListItemText inset>
 		<TypoGraphy color='inherit' variant='subtitle1'>
-		  <Link to='/profile' className={classes.links}>
-			 Profile <AccountBox />
+		  <Link to='/reserve' className={classes.links}>
+			Reserve <Schedule />
 		  </Link>
 		</TypoGraphy>
 	  </ListItemText>
 
 	  <ListItemText inset>
 		<TypoGraphy color='inherit' variant='subtitle1'>
-		  <Link to='/reserve' className={classes.links}>
-			Reserve <Schedule />
+		  <Link to='/profile' className={classes.links}>
+			 Profile <AccountBox />
 		  </Link>
 		</TypoGraphy>
 	  </ListItemText>
