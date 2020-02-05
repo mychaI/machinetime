@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 	fontSize: '28px',
 	fontFamily: 'roboto',
 	flex: 1,
+	cursor: 'default',
   },
   links: {
 	color: '#fff',
@@ -38,11 +39,13 @@ const useStyles = makeStyles({
 const Navbar = props => {
   const classes = useStyles();
 
-  const { user } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
 
   const handleLogout = e => {
 	e.preventDefault();
-	console.log('logout');
+	localStorage.removeItem('user');
+	localStorage.removeItem('jwt');
+	authContext.setUser(null);
   }
 
   const guestLinks = (
@@ -122,7 +125,7 @@ const Navbar = props => {
 				</TypoGraphy>
 			  </ListItemText>
 			
-			  {user ? authLinks : guestLinks}
+			  {authContext.user ? authLinks : guestLinks}
 
 			</ListItem>
 		  </List>
