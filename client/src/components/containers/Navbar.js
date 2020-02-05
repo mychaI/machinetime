@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { AuthContext } from '../Auth';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,6 +32,8 @@ const useStyles = makeStyles({
 
 const Navbar = props => {
   const classes = useStyles();
+
+  const authContext = useContext(AuthContext);
 
   const guestLinks = (
 	<>
