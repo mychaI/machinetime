@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { TextField, Select, Button } from '@material-ui/core';
+import { InputLabel, TextField, Select, MenuItem, Button } from '@material-ui/core';
 import { AuthContext } from '../../Auth';
 // Date Time Picker
 import { MuiPickersUtilsProvider, DatePicker, TimePicker } from '@material-ui/pickers';
@@ -9,19 +9,28 @@ import DateFnsUtils from '@date-io/date-fns';
 const Reserve = props => {
 
   const [date, setDate] = useState(new Date());
+  const [machine, setMachine] = useState('');
 
-  const [reservation, setReservation] = useState({
-	title: '',
-	start: Date.now(),
-	end: Date.now()+7200000,
-	allDay: false,
-	resource: null
-  });
+  const machines = [
+    'cnc',
+	'laser',
+  ];
+
+  const machineNames = {
+	cnc: 'Shark CNC', 
+	laser: 'CamFive Laser',
+  };
+
+  const updateSelection = e => {
+	setMachine(e.target.value);
+  }
+
 
   const authContext = useContext(AuthContext);
 
   const submitForm = e => {
-	console.log('submitting the following res ', authContext.user, reservation);
+	//console.log('submitting the following res ', authContext.user, reservation);
+	console.log(machine);
   }
 
 
@@ -30,7 +39,15 @@ const Reserve = props => {
 	  <div id='reservation'>
 	    <div className='container'>
 		  <h1>Reserve a time slot</h1>
-		  <Select label='Machine' className='input' />
+
+		  <InputLabel id='machine-select'>Machine Type</InputLabel>
+		  <Select label='Machine' labelId='machine-select' className='input' value={machine} onChange={updateSelection}>
+		    {machines.map( mech => (
+			  <MenuItem key={mech} value={mech}>
+			    {machineNames[mech]}
+			  </MenuItem>
+			))}
+		  </Select>
 		  <MuiPickersUtilsProvider utils={DateFnsUtils}>
 		    <DatePicker value={date} onChange={setDate} className='input' />
 			<TimePicker value={date} onChange={setDate} className='input' />
