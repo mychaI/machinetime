@@ -11,9 +11,9 @@ const Modal = props => (
 	    {props.title}
 	  </div>
 	  <div className='modal-content'>
-		<span className='modal-machine'>Machine: {props.title}</span>
-		<span className='modal-start'>Start: {props.start}</span>
-		<span className='modal-end'>End: {props.end}</span>
+		<span className='modal-machine'><b>Machine:</b> {props.title}</span>
+		<span className='modal-start'><b>Start:</b> {props.start}</span>
+		<span className='modal-end'><b>End:</b> {props.end}</span>
 	  </div>
 	</div>
   </Popup>

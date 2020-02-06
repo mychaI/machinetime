@@ -35,3 +35,35 @@ html, body {
 .alt-auth {
   text-decoration: none;
 }
+
+/* MODAL */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px;
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  font-size: 1.28rem;
+}
+
+.modal-header {
+  display: block;
+  font-size: 1.5rem;
+  flex-grow: 1;
+  align-self: center;
+  text-align: center;
+}
+
+.modal-content {
+  flex-grow: 1;
+}
+
+.modal-content > span {
+  display: block;
+}
