@@ -9,8 +9,9 @@ import DateFnsUtils from '@date-io/date-fns';
 
 const Reserve = props => {
 
-  const [date, setDate] = useState(new Date());
   const [machine, setMachine] = useState('');
+  const [start, setStart] = useState(new Date());
+  const [end, setEnd] = useState(start);
 
   const machines = [
     'cnc',
@@ -26,15 +27,22 @@ const Reserve = props => {
 	setMachine(e.target.value);
   }
 
+  const setDate = e => {
+	setStart(e);
+	setEnd(e);
+  }
+
 
   const authContext = useContext(AuthContext);
 
   const submitForm = e => {
-	//console.log('submitting the following res ', authContext.user, reservation);
+	// Create a new reservation object
 	const newReservation = {
 	  machine,
-	  date
-	// TODO: add user's first and last name to reservation
+	  start,
+	  end,
+	  firstName: authContext.user.firstName,
+	  lastName: authContext.user.lastName,
 	};
 	console.log('new reservation ', newReservation);
 	axios.post('/api/new', {newReservation})
@@ -59,9 +67,11 @@ const Reserve = props => {
 		  </Select>
 		  <MuiPickersUtilsProvider utils={DateFnsUtils}>
 		    <InputLabel id='date-select'>Date</InputLabel>
-		    <DatePicker value={date} minDate={Date.now()} onChange={setDate} className='input' />
-		    <InputLabel id='time-select'>Time</InputLabel>
-			<TimePicker value={date} onChange={setDate} className='input' />
+		    <DatePicker value={start} minDate={Date.now()} onChange={setDate} className='input' />
+		    <InputLabel id='time-select'>Start Time</InputLabel>
+			<TimePicker value={start} onChange={setStart} className='input' />
+		    <InputLabel id='time-select'>End Time</InputLabel>
+			<TimePicker value={end} onChange={setEnd} className='input' />
 		  </MuiPickersUtilsProvider>
 		  <Button variant='contained' className='auth-button' color='primary' onClick={submitForm}>Reserve</Button>
 		</div>
