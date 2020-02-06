@@ -26,7 +26,10 @@ module.exports = {
   },
 
   makeReservation: (req, res, next) => {
-
+	// simulate db query
+	console.log(req.user);
+	res.locals.reservation = 'test';
+	next();
 
   }
 

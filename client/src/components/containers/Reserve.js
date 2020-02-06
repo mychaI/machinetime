@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { InputLabel, TextField, Select, MenuItem, Button } from '@material-ui/core';
 import { AuthContext } from '../../Auth';
 // Date Time Picker
@@ -36,6 +37,9 @@ const Reserve = props => {
 	// TODO: add user's first and last name to reservation
 	};
 	console.log('new reservation ', newReservation);
+	axios.post('/api/new', {newReservation})
+		 .then( res => console.log('res ', res))
+		 .catch( err => console.log('Err :', err));
   }
 
 

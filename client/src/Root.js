@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import setAuthToken from './utils/setAuthToken';
 
 // Components
 import Navbar from './components/containers/Navbar';
@@ -11,6 +12,21 @@ import Calendar from './components/containers/Calendar';
 import Reserve from './components/containers/Reserve';
 import PrivateRoute from './components/containers/PrivateRoute';
 import { AuthProvider } from './Auth';
+
+// TODO move to useEffect hook
+if (localStorage.jwt) {
+  setAuthToken(localStorage.jwt);
+  // check token expiration
+  const currentTime = Date.now()/1000;
+  const exp = localStorage.user.exp;
+  if (exp < currentTime) {
+	setAuthToken(null);
+	localStorage.remove('jwt');
+	localStorage.remove('user');
+	window.location.href = '/login';
+	// TODO add authContext.setUser(null)
+  }
+};
 
 const Root = () => {
   return (
