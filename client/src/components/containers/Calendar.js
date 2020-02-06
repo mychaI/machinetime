@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../presentation/Modal';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
@@ -18,8 +19,22 @@ const events = [
 
 const Calendar = props => {
   const showDetail = (event, e) => {
+	setState({
+	  open: true,
+	  title: event.title,
+	  start: event.start.toString(),
+	  end: event.end.toString(),
+	});
 	console.log(event);
-  }
+  };
+
+  const closeModal = () => {
+	setState({
+	  open: false
+	});
+  };
+
+  const [state, setState] = useState({});
 
   return (
     <>
@@ -33,7 +48,7 @@ const Calendar = props => {
 		popup={true}
 		onSelectEvent={showDetail}
 	  />
-
+	  <Modal open={state.open} closeModal={closeModal} title={state.title} start={state.start} end={state.end} />
 	</>
   )
 };
