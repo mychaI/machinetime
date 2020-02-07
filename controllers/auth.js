@@ -34,7 +34,7 @@ module.exports = {
     const { email, password } = req.body;
 
     const queryString = `
-	  SELECT email, password, first_name, last_name, phone
+	  SELECT id, email, password, first_name, last_name, phone
 	  FROM users
 	  WHERE email = $1
 	`;

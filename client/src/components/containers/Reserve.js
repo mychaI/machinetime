@@ -38,11 +38,12 @@ const Reserve = props => {
   const submitForm = e => {
 	// Create a new reservation object
 	const newReservation = {
+	  user_id: authContext.user.userID,
+	  first_name: authContext.user.firstName,
+	  last_name: authContext.user.lastName,
 	  machine,
-	  start,
-	  end,
-	  firstName: authContext.user.firstName,
-	  lastName: authContext.user.lastName,
+	  start_time: start,
+	  end_time: end,
 	};
 	console.log('new reservation ', newReservation);
 	axios.post('/api/new', {newReservation})
