@@ -46,6 +46,7 @@ module.exports = {
             invalid_auth: "Invalid email or password"
           });
         }
+		const userID = data.rows[0].id;
         const firstName = data.rows[0].first_name;
         const lastName = data.rows[0].last_name;
         const phone = data.rows[0].phone;
@@ -56,6 +57,7 @@ module.exports = {
           if (result) {
             // Create JWT payload
             const payload = {
+			  userID,
 			  firstName,
 			  lastName,
 			  phone,
