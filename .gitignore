@@ -2,6 +2,7 @@ node_modules
 config
 DBscripts
 client/public/dist/
+yarn-error.log
 *.swp
 *.swo
 *~

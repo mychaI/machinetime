@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Modal from '../presentation/Modal';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
@@ -35,6 +36,17 @@ const Calendar = props => {
   };
 
   const [state, setState] = useState({});
+  const [events, setEvents] = useState([]);
+
+  // Retrieve all reservations when component mounts
+  useEffect( () => {
+	axios.get('/api/all')
+		 .then( res => {
+		   console.log('response ', res.data, res.data.reservations.length);
+		   setEvents(res.data.reservations);
+		 })
+		 .catch( err => console.log('Error retrieving reservations: ', err));
+  }, []);
 
   return (
     <>

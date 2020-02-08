@@ -18,13 +18,15 @@ if (localStorage.jwt) {
   setAuthToken(localStorage.jwt);
   // check token expiration
   const currentTime = Date.now()/1000;
-  const exp = localStorage.user.exp;
-  if (exp < currentTime) {
-	setAuthToken(null);
-	localStorage.remove('jwt');
-	localStorage.remove('user');
-	window.location.href = '/login';
-	// TODO add authContext.setUser(null)
+  if (localStorage.user) {
+    const exp = localStorage.user.exp;
+	if (exp < currentTime) {
+	  setAuthToken(null);
+	  localStorage.remove('jwt');
+	  localStorage.remove('user');
+	  window.location.href = '/login';
+	  // TODO add authContext.setUser(null)
+	}
   }
 };
 
