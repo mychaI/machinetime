@@ -3,6 +3,7 @@ import axios from 'axios';
 import Modal from '../presentation/Modal';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import momenttz from 'moment-timezone';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
@@ -47,8 +48,8 @@ const Calendar = props => {
 		   for (let reservation of res.data.reservations) {
 			 reservation = {
 			   ...reservation,
-			   start: moment(reservation.start_time, 'YYYY-MM-DD, h:mm:ss a').toDate(),
-			   end: moment(reservation.end_time, 'YYYY-MM-DD, h:mm:ss a').toDate(),
+			   start: momenttz.tz(reservation.start_time, 'America/Los_Angeles').toDate(),
+			   end: momenttz.tz(reservation.end_time, 'America/Los_Angeles').toDate(),
 			   title: reservation.machine
 			 }
 			 reservations.push(reservation);
