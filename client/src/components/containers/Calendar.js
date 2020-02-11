@@ -50,7 +50,7 @@ const Calendar = props => {
 			   ...reservation,
 			   start: momenttz.tz(reservation.start_time, 'America/Los_Angeles').toDate(),
 			   end: momenttz.tz(reservation.end_time, 'America/Los_Angeles').toDate(),
-			   title: reservation.machine
+			   title: reservation.machine + ' res. by ' + reservation.first_name + ' at ' + momenttz.tz(reservation.start_time, 'America/Los_Angeles').format('LT')
 			 }
 			 reservations.push(reservation);
 		   }
