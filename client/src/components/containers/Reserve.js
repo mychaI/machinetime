@@ -14,8 +14,8 @@ const Reserve = props => {
   const [end, setEnd] = useState(start);
 
   const machines = [
-    'cnc',
-	'laser',
+    'CNC',
+	'Laser',
   ];
 
   const machineNames = {
