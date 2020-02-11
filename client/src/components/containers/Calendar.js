@@ -42,8 +42,18 @@ const Calendar = props => {
   useEffect( () => {
 	axios.get('/api/all')
 		 .then( res => {
-		   console.log('response ', res.data, res.data.reservations.length);
-		   setEvents(res.data.reservations);
+		   let reservations = [];
+		   // convert date strings into JS date objects and create a key for 'title'
+		   for (let reservation of res.data.reservations) {
+			 reservation = {
+			   ...reservation,
+			   start: moment(reservation.start_time, 'YYYY-MM-DD, h:mm:ss a').toDate(),
+			   end: moment(reservation.end_time, 'YYYY-MM-DD, h:mm:ss a').toDate(),
+			   title: reservation.machine
+			 }
+			 reservations.push(reservation);
+		   }
+		   setEvents(reservations);
 		 })
 		 .catch( err => console.log('Error retrieving reservations: ', err));
   }, []);
