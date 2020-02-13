@@ -67,3 +67,8 @@ html, body {
 .modal-content > span {
   display: block;
 }
+
+/* Calendar */
+.rbc-toolbar-label {
+  font-size: 40px;
+}

@@ -19,8 +19,8 @@ const Reserve = props => {
   ];
 
   const machineNames = {
-	cnc: 'Shark CNC', 
-	laser: 'CamFive Laser',
+	CNC: 'Shark CNC', 
+	Laser: 'CamFive Laser',
   };
 
   const updateSelection = e => {
