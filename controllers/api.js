@@ -35,14 +35,12 @@ module.exports = {
 	db.query(createString, [user_id, first_name, last_name, machine, start_time, end_time])
 	  .then( data => {
 		console.log('reservation saved');
+		return next();
 	  })
 	  .catch( err => {
 		console.log('Error saving reservation to database: ', err);
 		return next({ err });
 	  });
-	res.locals.reservation = 'test';
-	next();
-
   }
 
 };

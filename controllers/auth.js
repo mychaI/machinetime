@@ -68,7 +68,7 @@ module.exports = {
             jwt.sign(
               payload,
               keys.secretOrKey,
-              { expiresIn: 900},
+              { expiresIn: 86400 },
               (err, token) => {
                 if (err) {
 				  return next(err);

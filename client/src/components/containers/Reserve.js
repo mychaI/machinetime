@@ -45,7 +45,6 @@ const Reserve = props => {
 	  start_time: start,
 	  end_time: end,
 	};
-	console.log('new reservation ', newReservation);
 	axios.post('/api/new', {newReservation})
 		 .then( res => console.log('res ', res))
 		 .catch( err => console.log('Err :', err));
