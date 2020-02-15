@@ -157,7 +157,11 @@ module.exports = {
         })
         .catch(err => next(err));
     }
-  }
-
+  },
   // TODO: Delete user
+  getProfile: (req, res, next) => {
+	//
+	console.log(req.user);
+	next();
+  },
 };
