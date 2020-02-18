@@ -9,13 +9,27 @@ const Profile = props => {
 
   const authContext = useContext(AuthContext);
 
+  const [reservations, setReservations] = useState([]);
+
 
   useEffect( () => {
 	console.log('auth', authContext.user.userID);
 	axios.get('/api/user/'+authContext.user.userID)
-		 .then( res => console.log(res))
+		 .then( res => {
+		   const responseData = res.data.reservations;
+		   const updatedReservations = [...reservations];
+		   for (let i = 0; i < responseData.length; i++) {
+			 updatedReservations.push(responseData[i].row.slice(1,-1).split(','));
+		   };
+		   console.log('updated ', updatedReservations);
+		   setReservations(updatedReservations)
+		 })
 		 .catch( err => console.log('Err: ', err));
   }, []);
+
+  const currentReservations = reservations.map( (res, i) => (
+    <li key={i}>{res[0]}</li>
+  ));
 
 
   return (
@@ -31,6 +45,9 @@ const Profile = props => {
 		<Button id='update-user' className='auth-button' color='primary' variant='contained' startIcon={<Save />}>Update Profile</Button>
 	  </form>
 	  <h1>Current Reservations</h1>
+	  <ul>
+		{currentReservations}
+	  </ul>
 
 	  <h1>Past Reservations</h1>
 
