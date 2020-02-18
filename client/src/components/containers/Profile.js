@@ -11,7 +11,10 @@ const Profile = props => {
 
 
   useEffect( () => {
-	console.log('auth', authContext);
+	console.log('auth', authContext.user.userID);
+	axios.get('/api/user/'+authContext.user.userID)
+		 .then( res => console.log(res))
+		 .catch( err => console.log('Err: ', err));
   }, []);
 
 
@@ -20,11 +23,11 @@ const Profile = props => {
 	  <h1>User Profile</h1>
 	  <form>
 		<InputLabel id='first-name-input'>First Name</InputLabel>
-		<TextField label={authContext.user.firstName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
+		<TextField placeholder={authContext.user.firstName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
 		<InputLabel id='last-name-input'>Last Name</InputLabel>
-		<TextField label={authContext.user.lastName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
+		<TextField placeholder={authContext.user.lastName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
 		<InputLabel id='phone-input'>Phone Number</InputLabel>
-		<TextField label={authContext.user.phone} className='input' fullWidth variant='outlined' name='first_name' type='text' />
+		<TextField placeholder={authContext.user.phone} className='input' fullWidth variant='outlined' name='first_name' type='text' />
 		<Button id='update-user' className='auth-button' color='primary' variant='contained' startIcon={<Save />}>Update Profile</Button>
 	  </form>
 	  <h1>Current Reservations</h1>

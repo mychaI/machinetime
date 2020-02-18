@@ -43,6 +43,17 @@ router.post('/new', passport.authenticate('jwt', { session: false }), apiControl
   });
 });
 
+/*
+ @route 	GET /api/user/:id
+ @desc		Get reservations by user id
+ @access	Private
+*/
+router.get('/user/:id', passport.authenticate('jwt', { session: false }), apiController.getUserReservations, (req, res, next) => {
+  res.json({
+	confirmation: 'success',
+	reservations: res.locals.reservations
+  });
+});
 
 module.exports = router;
 
