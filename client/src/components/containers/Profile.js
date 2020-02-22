@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Auth';
 import axios from 'axios';
+import moment from 'moment';
 
 import { InputLabel, TextField, Button } from '@material-ui/core';
 import { Delete, Save } from '@material-ui/icons'
@@ -25,8 +26,24 @@ const Profile = props => {
 		 .catch( err => console.log('Err: ', err));
   }, []);
 
-  const currentReservations = reservations.map( (res, i) => (
-    <li key={i}>{res[0]}</li>
+  const allReservations = reservations.map( (res, i) => {
+    return moment(res[0]);
+  });
+
+  const currReservations = allReservations.filter( (curr, i) => {
+	return new Date(curr._d) >= Date.now();
+  });
+
+  const prevReservations = allReservations.filter( (prev, i) => {
+	return new Date(prev._d) < Date.now();
+  });
+
+  const currentReservations = currReservations.map( (res, i) => (
+    <li key={i}>{res.format('ddd MMM DD YYYY HH:MM')}</li>
+  ));
+
+  const pastReservations = prevReservations.map( (res, i) => (
+    <li key={i}>{res.format('ddd MMM DD YYYY HH:MM')}</li>
   ));
 
   const updateProfile = (
@@ -65,7 +82,9 @@ const Profile = props => {
 		</ul>
 
 		<h1>Past Reservations</h1>
-
+		<ul>
+		  {pastReservations}
+		</ul>
 
 
 		<h1>Danger Zone</h1>

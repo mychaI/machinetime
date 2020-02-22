@@ -48,7 +48,7 @@ router.post('/new', passport.authenticate('jwt', { session: false }), apiControl
  @desc		Get reservations by user id
  @access	Private
 */
-router.get('/user/:id', apiController.checkToken, passport.authenticate('jwt', { session: false }), apiController.getUserReservations, (req, res, next) => {
+router.get('/user/:id', passport.authenticate('jwt', { session: false }), apiController.getUserReservations, (req, res, next) => {
   res.json({
 	confirmation: 'success',
 	reservations: res.locals.reservations
