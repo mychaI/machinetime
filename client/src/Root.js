@@ -13,29 +13,25 @@ import Reserve from './components/containers/Reserve';
 import PrivateRoute from './components/containers/PrivateRoute';
 import { AuthProvider } from './Auth';
 
+if (localStorage.jwt && localStorage.user) {
+const user = JSON.parse(localStorage.user);
+// check token expiration
+const currentTime = Date.now()/1000;
+  const exp = user.exp;
+  if (exp < currentTime) {
+	console.log('valid', exp < currentTime);
+	setAuthToken(null);
+	localStorage.removeItem('jwt');
+	localStorage.removeItem('user');
+	window.location.href = '/login';
+	// TODO add authContext.setUser(null)
+  } else {
+	setAuthToken(localStorage.jwt);
+  }
+};
 
 const Root = () => {
 
-  useEffect( () => {
-	// TODO move to useEffect hook
-	if (localStorage.jwt && localStorage.user) {
-	const user = JSON.parse(localStorage.user);
-	// check token expiration
-	const currentTime = Date.now()/1000;
-	  const exp = user.exp;
-	  if (exp < currentTime) {
-		console.log('valid', exp < currentTime);
-		setAuthToken(null);
-		localStorage.removeItem('jwt');
-		localStorage.removeItem('user');
-		window.location.href = '/login';
-		// TODO add authContext.setUser(null)
-	  } else {
-		setAuthToken(localStorage.jwt);
-	  }
-	};
-
-  }, []);
 
   return (
 	<>

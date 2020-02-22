@@ -20,7 +20,6 @@ const Profile = props => {
 		   for (let i = 0; i < responseData.length; i++) {
 			 updatedReservations.push(responseData[i].row.slice(1,-1).split(','));
 		   };
-		   console.log('updated ', updatedReservations);
 		   setReservations(updatedReservations)
 		 })
 		 .catch( err => console.log('Err: ', err));
@@ -56,20 +55,22 @@ const Profile = props => {
 
 
   return (
-    <div className='container'>
-	  <h1>User Profile</h1>
-	  {displayProfile}
-	  <h1>Current Reservations</h1>
-	  <ul>
-		{currentReservations}
-	  </ul>
+	<div id='profile'>
+	  <div className='container'>
+		<h1>User Profile</h1>
+		{displayProfile}
+		<h1>Current Reservations</h1>
+		<ul>
+		  {currentReservations}
+		</ul>
 
-	  <h1>Past Reservations</h1>
+		<h1>Past Reservations</h1>
 
 
 
-      <h1>Danger Zone</h1>
-	  <Button id='delete-user' className='auth-button' color='secondary' variant='contained' startIcon={<Delete />}>Delete Account</Button>
+		<h1>Danger Zone</h1>
+		<Button id='delete-user' className='auth-button' color='secondary' variant='contained' startIcon={<Delete />}>Delete Account</Button>
+	  </div>
 	</div>
   )
 }

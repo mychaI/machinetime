@@ -62,6 +62,7 @@ module.exports = {
   },
   checkToken: (req, res, next) => {
 	console.log(req.headers, req.user);
+	next();
   }
 
 };
