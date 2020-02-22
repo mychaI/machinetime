@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import setAuthToken from './utils/setAuthToken';
 
@@ -13,24 +13,30 @@ import Reserve from './components/containers/Reserve';
 import PrivateRoute from './components/containers/PrivateRoute';
 import { AuthProvider } from './Auth';
 
-// TODO move to useEffect hook
-if (localStorage.jwt) {
-  setAuthToken(localStorage.jwt);
-  // check token expiration
-  const currentTime = Date.now()/1000;
-  if (localStorage.user) {
-    const exp = localStorage.user.exp;
-	if (exp < currentTime) {
-	  setAuthToken(null);
-	  localStorage.remove('jwt');
-	  localStorage.remove('user');
-	  window.location.href = '/login';
-	  // TODO add authContext.setUser(null)
-	}
-  }
-};
 
 const Root = () => {
+
+  useEffect( () => {
+	// TODO move to useEffect hook
+	if (localStorage.jwt && localStorage.user) {
+	const user = JSON.parse(localStorage.user);
+	// check token expiration
+	const currentTime = Date.now()/1000;
+	  const exp = user.exp;
+	  if (exp < currentTime) {
+		console.log('valid', exp < currentTime);
+		setAuthToken(null);
+		localStorage.removeItem('jwt');
+		localStorage.removeItem('user');
+		window.location.href = '/login';
+		// TODO add authContext.setUser(null)
+	  } else {
+		setAuthToken(localStorage.jwt);
+	  }
+	};
+
+  }, []);
+
   return (
 	<>
 	  <AuthProvider>

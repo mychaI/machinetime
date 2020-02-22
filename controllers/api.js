@@ -60,6 +60,9 @@ module.exports = {
 	  .catch( err => next(err));
 
   },
+  checkToken: (req, res, next) => {
+	console.log(req.headers, req.user);
+  }
 
 };
 
