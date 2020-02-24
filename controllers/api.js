@@ -47,7 +47,7 @@ module.exports = {
 	const { user } = req.user;
 
 	const queryString = `
-	  SELECT (start_time, end_time, created_at)
+	  SELECT (start_time, end_time, machine, created_at)
 	  FROM reservations
 	  WHERE user_id = $1
 	`;

@@ -26,24 +26,26 @@ const Profile = props => {
 		 .catch( err => console.log('Err: ', err));
   }, []);
 
-  const allReservations = reservations.map( (res, i) => {
-    return moment(res[0]);
+  // Filter active reservations
+
+
+  const active = reservations.filter( (res, i) => {
+	return new Date(res[0]) >= Date.now();
   });
 
-  const currReservations = allReservations.filter( (curr, i) => {
-	return new Date(curr._d) >= Date.now();
-  });
 
-  const prevReservations = allReservations.filter( (prev, i) => {
-	return new Date(prev._d) < Date.now();
-  });
-
-  const currentReservations = currReservations.map( (res, i) => (
-    <li key={i}>{res.format('ddd MMM DD YYYY HH:MM')}</li>
+  const currentReservations = active.map( (res, i) => (
+    <li key={i}>{moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours</li>
   ));
 
-  const pastReservations = prevReservations.map( (res, i) => (
-    <li key={i}>{res.format('ddd MMM DD YYYY HH:MM')}</li>
+  // Filter completed reservations
+
+  const done = reservations.filter( (res, i) => {
+	return new Date(res[0]) < Date.now();
+  });
+
+  const pastReservations = done.map( (res, i) => (
+    <li key={i}>{moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours</li>
   ));
 
   const updateProfile = (
