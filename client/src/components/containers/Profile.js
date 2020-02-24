@@ -27,8 +27,12 @@ const Profile = props => {
   }, []);
 
 
-  const cancelReservation = e => {
-	console.log('TODO: handle cancel res');
+  const cancelReservation = resId => {
+	console.log('E: ', resId);
+	axios.delete('/api/reservation/'+resId)
+		 .then( data => console.log('Rows deleted: ', data))
+		 .catch( err => console.log('Error: ', err));
+
   };
 
   const active = reservations.filter( (res, i) => {
@@ -38,7 +42,7 @@ const Profile = props => {
   const currentReservations = active.map( (res, i) => (
     <li key={i}>
 	  {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours
-	  <IconButton className='cancel-button' size='small' onClick={cancelReservation} aria-label='Cancel this reservation'> <Cancel fontSize='inherit'/> </IconButton>
+	  <IconButton className='cancel-button' size='small' data-id={res.id} onClick={() => cancelReservation(res[4])} aria-label='Cancel this reservation'> <Cancel fontSize='inherit'/> </IconButton>
 	</li>
   ));
 

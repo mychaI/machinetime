@@ -44,10 +44,10 @@ module.exports = {
   },
 
   getUserReservations: (req, res, next) => {
-	const { user } = req.user;
+	const { user } = req;
 
 	const queryString = `
-	  SELECT (start_time, end_time, machine, created_at)
+	  SELECT (start_time, end_time, machine, created_at, id)
 	  FROM reservations
 	  WHERE user_id = $1
 	`;
@@ -60,9 +60,22 @@ module.exports = {
 	  .catch( err => next(err));
 
   },
-  checkToken: (req, res, next) => {
-	console.log(req.headers, req.user);
-	next();
+
+  deleteReservation: (req, res, next) => {
+	const { user } = req;
+	const { id } = req.params;
+
+ 	const deleteString = `
+	  DELETE FROM reservations
+	  WHERE (user_id = (SELECT id FROM users WHERE email = $1) AND id = $2)
+	`
+
+	db.query(deleteString, [user, id])
+	  .then( numRows => {
+		console.log('Deleted: ', numRows.rowCount);
+		res.locals.deletedRows = numRows.rowCount;
+	  })
+	  .catch( err => console.log('Error: ', err));
   }
 
 };

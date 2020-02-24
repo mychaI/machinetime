@@ -55,5 +55,18 @@ router.get('/user/:id', passport.authenticate('jwt', { session: false }), apiCon
   });
 });
 
+/*
+ @route 	GET /api/user/:id
+ @desc		Get reservations by user id
+ @access	Private
+*/
+router.delete('/reservation/:id', passport.authenticate('jwt', { session: false }), apiController.deleteReservation, (req, res, next) => {
+  res.json({
+	confirmation: 'success',
+	deletedRows: res.locals.deletedRows
+  });
+});
+
+
 module.exports = router;
 
