@@ -28,11 +28,11 @@ const Profile = props => {
 
 
   const cancelReservation = resId => {
-	console.log('E: ', resId);
-	axios.delete('/api/reservation/'+resId)
-		 .then( data => console.log('Rows deleted: ', data))
-		 .catch( err => console.log('Error: ', err));
-
+	if (confirm('Are you sure you want to cancel this reservation?')) {
+	  axios.delete('/api/reservation/'+resId)
+		   .then( data => console.log('Rows deleted: ', data))
+		   .catch( err => console.log('Error: ', err));
+	};
   };
 
   const active = reservations.filter( (res, i) => {
