@@ -40,7 +40,7 @@ const Profile = props => {
   });
 
   const currentReservations = active.map( (res, i) => (
-    <li key={i}>
+    <li key={i} className='reservation'>
 	  {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours
 	  <IconButton className='cancel-button' size='small' data-id={res.id} onClick={() => cancelReservation(res[4])} aria-label='Cancel this reservation'> <Cancel fontSize='inherit'/> </IconButton>
 	</li>
@@ -51,7 +51,9 @@ const Profile = props => {
   });
 
   const pastReservations = done.map( (res, i) => (
-    <li key={i}>{moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours</li>
+    <li key={i} className='reservation'>
+	  {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours
+	</li>
   ));
 
   const toggleMode = () => setUpdateMode(!updateMode);
@@ -65,7 +67,7 @@ const Profile = props => {
 		<InputLabel id='phone-input'>Phone Number</InputLabel>
 		<TextField placeholder={authContext.user.phone} className='input' fullWidth variant='outlined' name='first_name' type='text' />
 		<Button id='update-user' className='auth-button' color='primary' variant='contained' onClick={() => console.log('TODO: create save handler')} startIcon={<Save />}>Save Profile</Button>
-		<Button id='update-user' className='auth-button' color='default' variant='contained' onClick={toggleMode} startIcon={<Cancel />}>Cancel</Button>
+		<Button id='update-user' className='auth-button' color='secondary' variant='contained' onClick={toggleMode} startIcon={<Cancel />}>Cancel</Button>
 	  </form>
   );
 
