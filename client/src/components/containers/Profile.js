@@ -14,23 +14,27 @@ const Profile = props => {
   const [updateMode, setUpdateMode] = useState(false);
 
   useEffect( () => {
+	getReservations();
+  }, []);
+
+  const getReservations = () => {
 	axios.get('/api/user/'+authContext.user.userID)
 		 .then( res => {
 		   const responseData = res.data.reservations;
-		   const updatedReservations = [...reservations];
+		   const updatedReservations = [];
 		   for (let i = 0; i < responseData.length; i++) {
 			 updatedReservations.push(responseData[i].row.slice(1,-1).split(','));
 		   };
 		   setReservations(updatedReservations)
 		 })
 		 .catch( err => console.log('Err: ', err));
-  }, []);
+  }
 
 
   const cancelReservation = resId => {
 	if (confirm('Are you sure you want to cancel this reservation?')) {
 	  axios.delete('/api/reservation/'+resId)
-		   .then( data => console.log('Rows deleted: ', data))
+		   .then( res => getReservations() )
 		   .catch( err => console.log('Error: ', err));
 	};
   };

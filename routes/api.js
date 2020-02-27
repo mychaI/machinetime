@@ -61,9 +61,11 @@ router.get('/user/:id', passport.authenticate('jwt', { session: false }), apiCon
  @access	Private
 */
 router.delete('/reservation/:id', passport.authenticate('jwt', { session: false }), apiController.deleteReservation, (req, res, next) => {
+  console.log('deleting res');
   res.json({
 	confirmation: 'success',
-	deletedRows: res.locals.deletedRows
+	deleteCount: res.locals.deletedCount,
+	deleted: res.locals.deleted
   });
 });
 

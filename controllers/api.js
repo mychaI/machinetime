@@ -68,14 +68,16 @@ module.exports = {
  	const deleteString = `
 	  DELETE FROM reservations
 	  WHERE (user_id = (SELECT id FROM users WHERE email = $1) AND id = $2)
+	  RETURNING (id)
 	`
 
 	db.query(deleteString, [user, id])
-	  .then( numRows => {
-		console.log('Deleted: ', numRows.rowCount);
-		res.locals.deletedRows = numRows.rowCount;
+	  .then( data => {
+		res.locals.deletedCount = data.rowCount;
+		res.locals.deleted = data.rows;
+		return next();
 	  })
-	  .catch( err => console.log('Error: ', err));
+	  .catch( err => next(err));
   }
 
 };
