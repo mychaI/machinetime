@@ -12,6 +12,7 @@ const Profile = props => {
 
   const [reservations, setReservations] = useState([]);
   const [updateMode, setUpdateMode] = useState(false);
+  const [profile, setProfile] = useState(authContext.user);
 
   useEffect( () => {
 	getReservations();
@@ -29,6 +30,13 @@ const Profile = props => {
 		 })
 		 .catch( err => console.log('Err: ', err));
   }
+
+  const handleChange = e => {
+	setProfile({
+	  ...profile,
+	  [e.target.name]: e.target.value
+	})
+  };
 
 
   const cancelReservation = resId => {
@@ -62,15 +70,29 @@ const Profile = props => {
 
   const toggleMode = () => setUpdateMode(!updateMode);
 
+  const saveProfile = () => {
+	const profileUpdates = {
+	  email: profile.email,
+	  first_name: profile.firstName,
+	  last_name: profile.lastName,
+	  phone: profile.phone
+	}
+
+	console.log(profileUpdates);
+	// TODO: send axios post
+  };
+
   const updateProfile = (
 	  <form>
 		<InputLabel id='first-name-input'>First Name</InputLabel>
-		<TextField placeholder={authContext.user.firstName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
+		<TextField placeholder={authContext.user.firstName} className='input' fullWidth variant='outlined' name='firstName' type='text' onChange={handleChange} value={profile.firstName} />
 		<InputLabel id='last-name-input'>Last Name</InputLabel>
-		<TextField placeholder={authContext.user.lastName} className='input' fullWidth variant='outlined' name='first_name' type='text' />
+		<TextField placeholder={authContext.user.lastName} className='input' fullWidth variant='outlined' name='lastName' type='text' onChange={handleChange} value={profile.lastName} />
+		<InputLabel id='phone-input'>Email</InputLabel>
+		<TextField placeholder={authContext.user.email} className='input' fullWidth variant='outlined' name='email' type='text' onChange={handleChange} value={profile.email} />
 		<InputLabel id='phone-input'>Phone Number</InputLabel>
-		<TextField placeholder={authContext.user.phone} className='input' fullWidth variant='outlined' name='first_name' type='text' />
-		<Button id='update-user' className='auth-button' color='primary' variant='contained' onClick={() => console.log('TODO: create save handler')} startIcon={<Save />}>Save Profile</Button>
+		<TextField placeholder={authContext.user.phone} className='input' fullWidth variant='outlined' name='phone' type='text' onChange={handleChange} value={profile.phone} />
+		<Button id='update-user' className='auth-button' color='primary' variant='contained' onClick={saveProfile} startIcon={<Save />}>Save Profile</Button>
 		<Button id='update-user' className='auth-button' color='secondary' variant='contained' onClick={toggleMode} startIcon={<Cancel />}>Cancel</Button>
 	  </form>
   );
@@ -81,6 +103,8 @@ const Profile = props => {
 		<h2>{authContext.user.firstName}</h2>
 		<InputLabel id='last-name-input'>Last Name</InputLabel>
 		<h2>{authContext.user.lastName}</h2>
+		<InputLabel id='email-input'>Email</InputLabel>
+		<h2>{authContext.user.email}</h2>
 		<InputLabel id='phone-input'>Phone Number</InputLabel>
 		<h2>{authContext.user.phone}</h2>
 		<Button id='update-user' className='auth-button' color='primary' variant='contained' onClick={toggleMode} startIcon={<Edit />}>Update Profile</Button>

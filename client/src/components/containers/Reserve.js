@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   },
   checkMark: {
 	color: 'green',
+	margin: 'auto',
   }
 });
 
@@ -109,10 +110,8 @@ const Reserve = props => {
 		  <Modal open={modal} onClose={handleClose}>
 			<div className={classes.modal}>
 			  <h2>Confirmation:</h2>
-			  <p className={classes.modalText}>
-				<CheckCircleOutline className={classes.checkMark} />			  
-			    Reservation successful 
-			  </p>
+			  <CheckCircleOutline className={classes.checkMark} />			  
+			  <p className={classes.modalText}>Reservation successful</p>
 			</div>
 		  </Modal>
 		</div>
