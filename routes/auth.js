@@ -25,7 +25,7 @@ router.post("/login", authController.loginUser, (req, res, next) => {
   });
 });
 
-router.put("/update", passport.authenticate("jwt", { session: false }), authController.updateUser, (req, res, next) => {
+router.put("/update/:id", passport.authenticate("jwt", { session: false }), authController.updateUser, (req, res, next) => {
   res.json({
 	confirmation: "user successfully updated",
 	fields: res.locals.fields

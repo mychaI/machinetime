@@ -91,72 +91,31 @@ module.exports = {
 
   updateUser: (req, res, next) => {
     // TODO: Change logic to get email from cookie instead of from req.body
-    const { name, phone, email } = req.body;
+    const { email, first_name, last_name, phone} = req.body;
     const error = {};
 
-    // Update both name && phone number
-    if (name && phone) {
-      const updateUser = `
-	  UPDATE users
-	  SET 
-	    name = $2,
-		phone = $3
-	  WHERE email = $1
-	  RETURNING name, phone
-	  `;
+	const updateUser = `
+	UPDATE users
+	SET 
+	  email = $1,
+	  first_name = $2,
+	  last_name = $3,
+	  phone = $4
+	WHERE email = $1
+	RETURNING email, first_name, last_name, phone
+	`;
 
-      db.query(updateUser, [email, name, phone])
-        .then(data => {
-          if (data.rows.length === 0) {
-            error[namephone] = "No name or phone found";
-            return next(error);
-          }
-          console.log(data.rows[0]);
-          next();
-        })
-        .catch(err => next(err));
-    }
+	db.query(updateUser, [email, first_name, last_name, phone])
+	  .then(data => {
+		if (data.rows.length === 0) {
+		  error[notFound] = "No data found";
+		  return next(error);
+		}
+		console.log('Both : ', data.rows[0]);
+		next();
+	  })
+	  .catch(err => next(err));
 
-    // Update only name
-    else if (name) {
-      const updateName = `
-	  UPDATE users 
-	  SET name = $2
-	  WHERE email = $1
-	  RETURNING name
-	  `;
-
-      db.query(updateName, [email, name])
-        .then(data => {
-          if (data.rows.length === 0) {
-            error[name] = "No name result found";
-            return next(error);
-          }
-          console.log(data.rows[0]);
-          next();
-        })
-        .catch(err => next(err));
-    }
-
-    // Update only phone
-    else if (phone) {
-      const updatePhone = `
-	  UPDATE users
-	  SET phone = $2
-	  WHERE email = $1
-	  RETURNING phone
-	  `;
-      db.query(updatePhone, [email, phone])
-        .then(data => {
-          if (data.rows.length === 0) {
-            error[phone] = "No phone result found";
-            return next(error);
-          }
-          console.log(data.rows[0]);
-          next();
-        })
-        .catch(err => next(err));
-    }
   },
   // TODO: Delete user
   getProfile: (req, res, next) => {

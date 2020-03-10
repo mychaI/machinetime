@@ -39,5 +39,11 @@ app.get('/*', function(req, res) {
   res.render(path.join(__dirname, 'views', 'index.ejs'));
 });
 
+// Global Error Handler:
+app.use(  (err, req, res, next) => {
+  console.log('Global error handler: ', err.stack);
+  res.status(500).send('Oops, there was a server  error');
+});
+
 // Bootstrap server
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

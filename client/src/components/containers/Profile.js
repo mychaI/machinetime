@@ -80,6 +80,9 @@ const Profile = props => {
 
 	console.log(profileUpdates);
 	// TODO: send axios post
+	axios.put('/auth/update/' + authContext.user.userID, profileUpdates)
+	  .then( res => console.log('Response ', res))
+	  .catch( err => console.log('Error: ', err));
   };
 
   const updateProfile = (
