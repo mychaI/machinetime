@@ -108,10 +108,10 @@ module.exports = {
 	db.query(updateUser, [email, first_name, last_name, phone])
 	  .then(data => {
 		if (data.rows.length === 0) {
-		  error[notFound] = "No data found";
+		  error.notFound = "No data found";
 		  return next(error);
 		}
-		console.log('Both : ', data.rows[0]);
+		res.locals.fields = data.rows[0];
 		next();
 	  })
 	  .catch(err => next(err));

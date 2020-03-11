@@ -41,7 +41,7 @@ app.get('/*', function(req, res) {
 
 // Global Error Handler:
 app.use(  (err, req, res, next) => {
-  console.log('Global error handler: ', err.stack);
+  console.log('Global error handler: ', err);
   res.status(500).send('Oops, there was a server  error');
 });
 

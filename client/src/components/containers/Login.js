@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import setAuthToken from '../../utils/setAuthToken';
 
 // Import Context
 import { AuthContext } from '../../Auth';
@@ -31,6 +32,7 @@ const Login = props => {
 		   const decoded = jwt_decode(token);
 		   authContext.setUser(decoded);
 		   localStorage.setItem('user', JSON.stringify(decoded));
+		   setAuthToken(token);
 		   props.history.push('/');
 		 })
 		 .catch( err => console.log('Error ', err));

@@ -78,8 +78,6 @@ const Profile = props => {
 	  phone: profile.phone
 	}
 
-	console.log(profileUpdates);
-	// TODO: send axios post
 	axios.put('/auth/update/' + authContext.user.userID, profileUpdates)
 	  .then( res => console.log('Response ', res))
 	  .catch( err => console.log('Error: ', err));
@@ -113,7 +111,6 @@ const Profile = props => {
 		<Button id='update-user' className='auth-button' color='primary' variant='contained' onClick={toggleMode} startIcon={<Edit />}>Update Profile</Button>
 	  </form>
   );
-
 
   return (
 	<div id='profile'>
