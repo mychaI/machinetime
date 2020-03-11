@@ -3,7 +3,7 @@ import { AuthContext } from '../../Auth';
 import axios from 'axios';
 import moment from 'moment';
 
-import { InputLabel, TextField, Button, IconButton } from '@material-ui/core';
+import { InputLabel, TextField, Button, IconButton, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import { Delete, Save, Edit, Cancel } from '@material-ui/icons'
 
 const Profile = props => {
@@ -52,10 +52,10 @@ const Profile = props => {
   });
 
   const currentReservations = active.map( (res, i) => (
-    <li key={i} className='reservation'>
-	  {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours
+    <ListItem key={i} button divider>
+	  <ListItemText> {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours </ListItemText>
 	  <IconButton className='cancel-button' size='small' data-id={res.id} onClick={() => cancelReservation(res[4])} aria-label='Cancel this reservation'> <Cancel fontSize='inherit'/> </IconButton>
-	</li>
+	</ListItem>
   ));
 
   const done = reservations.filter( (res, i) => {
@@ -63,9 +63,9 @@ const Profile = props => {
   });
 
   const pastReservations = done.map( (res, i) => (
-    <li key={i} className='reservation'>
-	  {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours
-	</li>
+    <ListItem key={i} button divider>
+	  <ListItemText> {moment(res[0]).format('ddd MMM DD YYYY HH:MM')} : {res[2]} for {moment.duration(moment(res[1]).diff(moment(res[0]))).asHours().toFixed(1)} hours </ListItemText>
+	</ListItem>
   ));
 
   const toggleMode = () => setUpdateMode(!updateMode);
@@ -118,14 +118,14 @@ const Profile = props => {
 		<h1>User Profile</h1>
 		{updateMode ? updateProfile : displayProfile}
 		<h1>Current Reservations</h1>
-		<ul>
+		<List aria-label="Upcoming Reservations">
 		  {currentReservations}
-		</ul>
+		</List>
 
 		<h1>Past Reservations</h1>
-		<ul>
+		<List aria-label="Past Reservations">
 		  {pastReservations}
-		</ul>
+		</List>
 
 
 		<h1>Danger Zone</h1>
