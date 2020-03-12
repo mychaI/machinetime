@@ -4,12 +4,6 @@ const passport = require("passport");
 // Controllers
 const authController = require("../controllers/auth");
 
-router.get("/test", (req, res) => {
-  res.json({
-    confirmation: "success"
-  });
-});
-
 router.post("/register", authController.createUser, (req, res, next) => {
   res.json({
     confirmation: "User successfully created",
@@ -32,10 +26,9 @@ router.put("/update/:id", passport.authenticate("jwt", { session: false }), auth
   });
 });
 
-router.get('/profile/:id', passport.authenticate('jwt', { session: false }), authController.getProfile, (req, res, next) => {
+router.delete('/profile/:id', passport.authenticate('jwt', { session: false}), authController.deleteUser, (req, res, next) => {
   res.json({
-	confirmation: 'success',
-	profile: res.locals.userProfile
+	confirmation: 'successfully deleted profile',
   });
 });
 

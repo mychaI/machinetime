@@ -90,7 +90,6 @@ module.exports = {
   },
 
   updateUser: (req, res, next) => {
-    // TODO: Change logic to get email from cookie instead of from req.body
     const { email, first_name, last_name, phone} = req.body;
     const error = {};
 
@@ -117,10 +116,10 @@ module.exports = {
 	  .catch(err => next(err));
 
   },
-  // TODO: Delete user
-  getProfile: (req, res, next) => {
-	//
-	console.log(req.user);
+
+  deleteUser: (req, res, next) => {
+	console.log('deleting user');
 	next();
   },
+
 };
