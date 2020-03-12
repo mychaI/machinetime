@@ -113,9 +113,11 @@ const Profile = props => {
   );
 
   const deleteAccount = () => {
-	axios.delete('/auth/profile/' + authContext.user.userID)
-	  .then( res => console.log('Response: ', res))
-	  .catch( err => console.log('Error: ', err));
+	if (confirm('Are you sure you want to delete your account? THIS IS NOT REVERSIBLE!')) {
+	  axios.delete('/auth/profile/' + authContext.user.userID)
+		.then( res => console.log('Response: ', res))
+		.catch( err => console.log('Error: ', err));
+	}
   };
 
   return (

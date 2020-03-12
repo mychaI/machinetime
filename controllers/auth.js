@@ -118,8 +118,18 @@ module.exports = {
   },
 
   deleteUser: (req, res, next) => {
-	console.log('deleting user');
-	next();
+	console.log('deleting user ', req.user);
+	const email = req.user;
+	const deleteString = `
+	DELETE FROM users
+	WHERE email = $1
+	`
+	db.query(deleteString, [email])
+	  .then( data => {
+		return next();
+	  })
+	  .catch( err => next(err));
   },
+
 
 };
