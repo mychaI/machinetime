@@ -26,6 +26,7 @@ const Register = props => {
 	const newUser = {
 	  email: state.email,
 	  password: state.password,
+	  passowrd2: state.password2,
 	  firstName: state.firstName,
 	  lastName: state.lastName,
 	  phone: state.phone
