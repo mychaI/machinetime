@@ -15,6 +15,11 @@ const Login = props => {
 	password: '',
   });
 
+  const [err, setErr] = useState({
+	status: '',
+	message: '',
+  });
+
   const authContext = useContext(AuthContext);
 
   const updateField = e => {
@@ -44,8 +49,8 @@ const Login = props => {
 	    <div className='auth'>
 		  <h1>Log in to your account</h1>
 		  <form>
-		    <TextField label='Email' className='input' fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
-			<TextField label='Password' className='input' fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
+		    <TextField label='Email' className='input' required fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
+			<TextField label='Password' className='input' required fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
 			
 			<Button variant='contained' className='auth-button' color='primary'  onClick={submitForm}>Submit</Button>
 			<Link to='/register' className='alt-auth'>Create a new account</Link>

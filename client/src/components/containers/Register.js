@@ -34,9 +34,10 @@ const Register = props => {
 	axios.post('/auth/register', newUser)
 		 .then( res =>  {
 		   //throw popup saying please login with newly created user
+		   console.log('Res: ', res);
 		   props.history.push('/login');
 		 })
-		 .catch( err => console.log('Error ', err));
+		 .catch( err => console.log('Error ', err.response.data));
   };
 
   return (

@@ -6,10 +6,10 @@ const authController = require("../controllers/auth");
 
 router.post("/register", authController.createUser, (req, res, next) => {
   res.json({
-    confirmation: "User successfully created",
-    username: res.locals.username,
-	message: "Please sign in with your newly account"
-  });
+    confirmation: res.locals.confirmation,
+    username: res.locals.firstName,
+	message: res.locals.message,
+  })
 });
 
 router.post("/login", authController.loginUser, (req, res, next) => {
