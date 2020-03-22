@@ -40,7 +40,7 @@ const Login = props => {
 		   setAuthToken(token);
 		   props.history.push('/');
 		 })
-		 .catch( err => console.log('Error ', err));
+		 .catch( err => setErr(err.response.data));
   };
 
   return (
@@ -49,8 +49,8 @@ const Login = props => {
 	    <div className='auth'>
 		  <h1>Log in to your account</h1>
 		  <form>
-		    <TextField label='Email' className='input' required fullWidth variant='outlined' name='email' type='email' onChange={updateField} />
-			<TextField label='Password' className='input' required fullWidth variant='outlined' name='password' type='password' onChange={updateField} />
+		    <TextField label='Email' className='input' required fullWidth variant='outlined' name='email' type='email' onChange={updateField} error={err.email} helperText={err.email} />
+			<TextField label='Password' className='input' required fullWidth variant='outlined' name='password' type='password' onChange={updateField} error={err.password} helperText={err.password} />
 			
 			<Button variant='contained' className='auth-button' color='primary'  onClick={submitForm}>Submit</Button>
 			<Link to='/register' className='alt-auth'>Create a new account</Link>

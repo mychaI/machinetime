@@ -28,7 +28,7 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (!Validator.isMobilePhone(data.phone, ['en-US'])) {
-	errors.phone = 'Invalid phone number (must be in format: XXX-XXX-XXXX)'
+	errors.phone = 'Invalid phone number'
   }
 
   if (Validator.isEmpty(data.phone)) {

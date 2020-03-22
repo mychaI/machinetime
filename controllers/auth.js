@@ -8,6 +8,7 @@ const passport = require("passport");
 
 // Load input validation
 const validateRegisterInput = require('../validation/auth');
+const validateLoginInput = require('../validation/login');
 
 module.exports = {
   createUser: (req, res, next) => {
@@ -15,9 +16,8 @@ module.exports = {
 	const { errors, isValid } = validateRegisterInput(req.body);
 
 	if (!isValid) {
-	  console.log(errors);
 	  return res.status(422).json(errors);
-	}
+	};
 
     const { email, password, firstName, lastName, phone } = req.body;
 
@@ -43,6 +43,12 @@ module.exports = {
   },
 
   loginUser: (req, res, next) => {
+
+	const { errors, isValid } = validateLoginInput(req.body);
+	if (!isValid) {
+	  return res.status(422).json(errors);
+	};
+
     const { email, password } = req.body;
 
     const queryString = `
