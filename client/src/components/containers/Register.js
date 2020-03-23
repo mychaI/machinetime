@@ -26,11 +26,13 @@ const Register = props => {
 	const newUser = {
 	  email: state.email,
 	  password: state.password,
-	  passowrd2: state.password2,
+	  password2: state.password2,
 	  firstName: state.firstName,
 	  lastName: state.lastName,
 	  phone: state.phone
 	};
+
+	console.log(newUser);
 
 	//console.log('posting ', newUser);
 	// TODO: input validation
