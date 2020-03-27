@@ -73,7 +73,7 @@ const Reserve = props => {
 	};
 	axios.post('/api/new', {newReservation})
 		 .then( res => setModal(true))
-		 .catch( err => console.log('Err :', err));
+		 .catch( err => console.log('Err :', err.response.data));
   }
 
   const handleClose = () => {

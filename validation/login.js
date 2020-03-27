@@ -10,7 +10,7 @@ module.exports = data => {
   if (Validator.isEmpty(data.email)) {
 	errors.email = 'Email is required';
   }
-
+ 
   if (Validator.isEmpty(data.password)) {
 	errors.password = 'Password is required';
   }
@@ -18,5 +18,5 @@ module.exports = data => {
   return ({
 	errors,
 	isValid: isEmpty(errors)
-  })
+  });
 };

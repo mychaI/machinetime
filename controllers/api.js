@@ -1,6 +1,8 @@
 const db = require('../db');
 const env = require('../config/env');
 
+const validateReservationInput = require('../validation/reserve');
+
 module.exports = {
   getAllReservations: (req, res, next) => {
 	const queryString = `
@@ -25,6 +27,15 @@ module.exports = {
   },
 
   makeReservation: (req, res, next) => {
+
+	/* Input Validation */
+	const { errors, isValid } = validateReservationInput(req.body.newReservation);
+
+	if (!isValid) {
+	  return res.status(422).json(errors);
+	};
+
+
 	const { user_id, first_name, last_name, machine, start_time, end_time } = req.body.newReservation;
 
 	const createString = `
