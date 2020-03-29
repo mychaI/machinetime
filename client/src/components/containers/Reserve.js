@@ -32,6 +32,10 @@ const useStyles = makeStyles({
 	color: 'red',
 	margin: 'auto',
   },
+  errorText: {
+	fontSize: '1.25em',
+	textAlign: 'left',
+  }
 });
 
 
@@ -86,11 +90,11 @@ const Reserve = props => {
 		   setModal(true)
 		 })
 		 .catch( err => {
-		   console.log('Err :', err.response.data)
-		   modalDetails.errors = Object.values(err.response.data).map( (value, i) => (<li key={i}>{value}</li>));
+		   const errors = Object.values(err.response.data).map( (value, i) => (<li key={i}>{value}</li>));
 		   setModalDetails({
 			 confirmation: false,
-			 message: 'Unable to make reservation due to the following: '
+			 message: 'Unable to make reservation due to the following: ',
+			 errors
 		   });
 		   setModal(true);
 		 });
@@ -132,7 +136,9 @@ const Reserve = props => {
 			  <h2>Confirmation:</h2>
 			  { modalDetails.confirmation ? (<CheckCircleOutline className={classes.checkMark} />) : (<ErrorOutline className={classes.error} />) }
 			  <p className={classes.modalText}>{modalDetails.message}</p>
-			  { modalDetails.confirmation && modalDetails.errors  }
+			  <ul className={classes.errorText}>
+				{ modalDetails.errors  }
+			  </ul>
 			</div>
 		  </Modal>
 		</div>

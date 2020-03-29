@@ -12,7 +12,7 @@ module.exports = data => {
   const errors = {};
 
   if (Validator.isEmpty(data.machine)) {
-	errors.machine = 'Machine cannot be blank. Please select a machine';
+	errors.machine = 'Machine cannot be blank';
   }
 
   if (Validator.isEmpty(data.start_time)) {
