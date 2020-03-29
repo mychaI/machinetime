@@ -38,20 +38,47 @@ module.exports = {
 
 	const { user_id, first_name, last_name, machine, start_time, end_time } = req.body.newReservation;
 
-	const createString = `
-	  INSERT INTO reservations (user_id, first_name, last_name, machine, start_time, end_time)
-	  VALUES ($1, $2, $3, $4, $5, $6)
-	`;
-
-	db.query(createString, [user_id, first_name, last_name, machine, start_time, end_time])
+	//TODO: Check for existing reservation
+	const queryString = `
+	  SELECT (first_name, last_name)
+	  FROM reservations
+	  WHERE machine = $1
+	  AND start_time >= $2
+	  AND end_time <= $3`
+	
+	db.query(queryString, [machine, start_time, end_time])
 	  .then( data => {
-		console.log('reservation saved');
-		return next();
+		console.log('Data: ', data.rows, 'Length: ', data.rows.length);
+		// Check for existing reservations 
+		if (data.rows.length > 0) {
+		  console.log('Duplicate!');
+		  return res.status(422).json({
+			conflict: 'Machine is already reserved at this time by',
+			name: first_name+' '+last_name
+		  })
+		  next({err});
+		} else {
+		  // Create a new reservation
+		  const createString = `
+			INSERT INTO reservations (user_id, first_name, last_name, machine, start_time, end_time)
+			VALUES ($1, $2, $3, $4, $5, $6)
+		  `;
+
+		  db.query(createString, [user_id, first_name, last_name, machine, start_time, end_time])
+			.then( data => {
+			  console.log('reservation saved');
+			  return next();
+			})
+			.catch( err => {
+			  console.log('Error saving reservation to database: ', err);
+			  return next({ err });
+			});
+		}
 	  })
 	  .catch( err => {
-		console.log('Error saving reservation to database: ', err);
-		return next({ err });
+		return next({err});
 	  });
+
   },
 
   getUserReservations: (req, res, next) => {
