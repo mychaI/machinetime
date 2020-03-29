@@ -38,7 +38,8 @@ router.get('/:id', apiController.getReservationById, (req, res, next) => {
 */
 router.post('/new', passport.authenticate('jwt', { session: false }), apiController.makeReservation, (req, res, next) => {
   res.json({
-	confirmation: 'successfully made a reservation',
+	confirmation: true,
+	message: 'Reservation successful',
 	resrvation: res.locals.reservation
   });
 });
