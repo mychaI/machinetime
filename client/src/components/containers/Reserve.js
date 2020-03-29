@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, TextField, Select, MenuItem, Button, Modal } from '@material-ui/core';
-import { CheckCircleOutline } from '@material-ui/icons';
+import { CheckCircleOutline, ErrorOutline } from '@material-ui/icons';
 import { AuthContext } from '../../Auth';
 // Date Time Picker
 import { MuiPickersUtilsProvider, DatePicker, TimePicker } from '@material-ui/pickers';
@@ -27,7 +27,11 @@ const useStyles = makeStyles({
   checkMark: {
 	color: 'green',
 	margin: 'auto',
-  }
+  },
+  error: {
+	color: 'red',
+	margin: 'auto',
+  },
 });
 
 
@@ -38,6 +42,7 @@ const Reserve = props => {
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(start);
   const [modal, setModal] = useState(false);
+  const [modalDetails, setModalDetails] = useState({});
 
   const machines = [
     'CNC',
@@ -72,9 +77,24 @@ const Reserve = props => {
 	  end_time: end,
 	};
 	axios.post('/api/new', {newReservation})
-		 .then( res => setModal(true))
-		 .catch( err => console.log('Err :', err.response.data));
-  }
+		 .then( res => {
+		   console.log('Resp: ', res);
+		   setModalDetails({
+			 confirmation: res.data.confirmation,
+			 message: res.data.message
+		   });
+		   setModal(true)
+		 })
+		 .catch( err => {
+		   console.log('Err :', err.response.data)
+		   modalDetails.errors = Object.values(err.response.data).map( (value, i) => (<li key={i}>{value}</li>));
+		   setModalDetails({
+			 confirmation: false,
+			 message: 'Unable to make reservation due to the following: '
+		   });
+		   setModal(true);
+		 });
+  };
 
   const handleClose = () => {
 	setModal(false);
@@ -110,8 +130,9 @@ const Reserve = props => {
 		  <Modal open={modal} onClose={handleClose}>
 			<div className={classes.modal}>
 			  <h2>Confirmation:</h2>
-			  <CheckCircleOutline className={classes.checkMark} />			  
-			  <p className={classes.modalText}>Reservation successful</p>
+			  { modalDetails.confirmation ? (<CheckCircleOutline className={classes.checkMark} />) : (<ErrorOutline className={classes.error} />) }
+			  <p className={classes.modalText}>{modalDetails.message}</p>
+			  { modalDetails.confirmation && modalDetails.errors  }
 			</div>
 		  </Modal>
 		</div>
