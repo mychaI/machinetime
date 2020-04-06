@@ -23,6 +23,13 @@ const Landing = () => {
 		  <figure className='detail-item'>
 		  </figure>
 		</section>
+		<section id='about'>
+		  <h2> About the Workshop </h2>
+		  <div className='about-item'>
+		    <p>Shop Hours </p>
+			<p>Contact </p>
+		  </div>
+		</section>
 	  </div>
 
 	</>

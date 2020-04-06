@@ -85,7 +85,7 @@ html, body {
   width: 100%;
   height: 100%;
   background: linear-gradient(45deg, #045590, teal);
-  background-image: url("https://s3-media0.fl.yelpcdn.com/bphoto/RlagBEUL0DglN0wv5qP4jQ/o.jpg");
+  background-image: url("https://images.unsplash.com/photo-1579618215542-2ed5e10b65ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1872&q=80");
   background-repeat: no-repeat;
   position: fixed;
   top: 0;
@@ -110,5 +110,6 @@ html, body {
   margin-top: 80vh;
   padding: 80px 0;
   position: relative;
+  min-height: 500px;
 }
 	
