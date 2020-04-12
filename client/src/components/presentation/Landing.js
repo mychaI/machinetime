@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import Hero from './Hero';
+import Details from './Details';
 
 const Landing = () => {
 
@@ -7,22 +9,11 @@ const Landing = () => {
 	  <div id='landing-page'>
 	    <div className='landing-bg'>
 		</div>
-		<section id='hero'>
-		  <h1>Welcome to MachineTime</h1>
-		</section>
-		<section id='details'>
-		  <h2> Details about MachineTime </h2>
-		  <figure className='detail-item'>
-		    <div className='image-frame'>
 
-			</div>
-			<div className='animated fadeInRight'>
-			</div>
-		  </figure>
+		<Hero />
 
-		  <figure className='detail-item'>
-		  </figure>
-		</section>
+		<Details />
+
 		<section id='about'>
 		  <h2> About the Workshop </h2>
 		  <div className='about-item'>
