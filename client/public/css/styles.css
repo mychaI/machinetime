@@ -115,4 +115,68 @@ html, body {
   position: relative;
   min-height: 500px;
 }
-	
+
+figure {
+  margin: 0;
+}
+
+.details-title {
+  text-align: center;
+  margin-bottom: 80px;
+  font-size: 3em;
+}
+
+#landing-page #details figure.detail-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  font-size: 1.5em;
+}	
+
+#landing-page #details figure.detail-item:last-of-type {
+  margin-bottom: 0;
+}
+
+#landing-page #details figure.detail-item > div {
+  width: 50%;
+}
+
+#landing-page #details .image-frame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.image-frame > img {
+  max-width: 90%;
+  padding: 0 40px;
+}
+
+#landing-page #details figcaption {
+  padding: 0 40px;
+}
+
+#landing-page #details ul {
+  list-style-type: disc;
+}
+
+#landing-page #details i {
+  font-size: 100px;
+  color: #045590;
+  margin: 0 20px;
+}
+

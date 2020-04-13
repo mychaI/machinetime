@@ -9,9 +9,9 @@ const Details = () => {
   return (
     <section id='details'>
 
-	  <h2>Details about MachineTime</h2>
+	  <h2 className='details-title'>Details about MachineTime</h2>
 
-	  <figure className='feature-item'>
+	  <figure className='detail-item'>
 	    <div className='image-frame'>
 		  <img src={classPic} alt='detail-1'/>
 		</div>
@@ -27,7 +27,7 @@ const Details = () => {
 		</ScrollAnimation>
 	  </figure>
 
-	  <figure className='feature-item'>
+	  <figure className='detail-item'>
 		<ScrollAnimation animateIn='fadeInLeft'>
 		  <figcaption className='detail-description'>
 		    <h3>Detail 1</h3>
@@ -43,7 +43,7 @@ const Details = () => {
 		</div>
 	  </figure>
 
-	  <figure className='feature-item'>
+	  <figure className='detail-item'>
 	    <div className='image-frame'>
 		  <img src={classPic} alt='detail-1'/>
 		</div>

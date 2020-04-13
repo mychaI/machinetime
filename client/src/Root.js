@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import setAuthToken from './utils/setAuthToken';
+import "animate.css/animate.min.css";
 
 // Components
 import Navbar from './components/containers/Navbar';
