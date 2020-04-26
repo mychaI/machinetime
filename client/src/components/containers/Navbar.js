@@ -11,7 +11,7 @@ import TypoGraphy from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Home, LockOpen, Edit, Event, AccountBox, Schedule, ExitToApp } from '@material-ui/icons';
+import { Info, LockOpen, Edit, Event, AccountBox, Schedule, ExitToApp } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   navbar: {
@@ -20,10 +20,13 @@ const useStyles = makeStyles({
   },
   title: {
 	fontSize: '28px',
-	fontFamily: 'roboto',
 	flex: 1,
-	cursor: 'default',
   },
+  titleLink: {
+	color: '#fff',
+	fontFamily: 'roboto',
+	textDecoration: 'none'
+  },	
   links: {
 	color: '#fff',
 	fontSize: '20px',
@@ -103,7 +106,9 @@ const Navbar = props => {
 	  <AppBar className={classes.navbar} position='static'>
 		<Toolbar>
 		  <TypoGraphy variant='h1' className={classes.title}>
-			MachineTime
+		    <Link to='/' className={classes.titleLink}>
+			  MachineTime
+			</Link>
 		  </TypoGraphy>
 
 		  <List component='nav'>
@@ -111,8 +116,8 @@ const Navbar = props => {
 
 			  <ListItemText inset>
 				<TypoGraphy color='inherit' variant='subtitle1'>
-				  <Link to='/' className={classes.links}>
-					Home <Home />
+				  <Link to='/about' className={classes.links}>
+					About <Info />
 				  </Link>
 				</TypoGraphy>
 			  </ListItemText>
