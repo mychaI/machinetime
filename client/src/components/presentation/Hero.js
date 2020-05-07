@@ -12,7 +12,7 @@ const Hero = () => {
 		</div>
 		
 		<div className='subtitle'>
-		  <h2> Scheduling time on shop machines Made easy </h2>
+		  <h2> Reserve time on shop machines Made easy </h2>
 		</div>
 
 	  </div>

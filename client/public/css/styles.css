@@ -108,7 +108,14 @@ html, body {
   left: 0;
 }
 
+.subtitle {
+  font-family: roboto;
+  font-size: 1em;
+  color: #323232;
+}
+
 #details {
+  font-family: roboto;
   background: #f8f8ff;
   margin-top: 80vh;
   padding: 80px 0;
@@ -124,6 +131,16 @@ figure {
   text-align: center;
   margin-bottom: 80px;
   font-size: 3em;
+  font-weight: 100;
+}
+
+.detail-description {
+  text-align: center;
+  font-weight: 100;
+}
+
+.detail-list {
+  text-align: left;
 }
 
 #landing-page #details figure.detail-item {
@@ -180,3 +197,50 @@ figure {
   margin: 0 20px;
 }
 
+
+/* Calendar Component */
+
+#calendar-container {
+  padding: 0 50px;
+  font-family: roboto;
+  margin-bottom: 50px;
+}
+
+#calendar-container > h1 {
+  text-align: center;
+  margin: 60px 0;
+}
+
+/* About Component */
+#about {
+  margin: 80px 15%;
+  color: #fff;
+  font-size: 1.5em;
+  font-family: roboto;
+  text-shadow: 1px 1px 0 #323232;
+}
+
+#about-content {
+  display: flex;
+}
+
+#about-middle {
+  flex-grow: 1;
+}
+
+.about-image {
+  align-self: center;
+  justify-self: flex-end;
+}
+
+/* Footer Component */
+#footer {
+  font-family: roboto;
+  background: #f8f8ff;
+  padding: 5px;
+}
+
+#footer-text {
+  text-align: right;
+  padding-right: 10px;
+}

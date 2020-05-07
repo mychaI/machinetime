@@ -60,7 +60,7 @@ const Calendar = props => {
   }, []);
 
   return (
-    <>
+    <div id='calendar-container'>
 	  <h1>Current Schedule</h1>
 	  <BigCalendar 
 	    localizer={localizer}
@@ -72,7 +72,7 @@ const Calendar = props => {
 		onSelectEvent={showDetail}
 	  />
 	  <Modal open={state.open} closeModal={closeModal} title={state.title} start={state.start} end={state.end} />
-	</>
+	</div>
   )
 };
 

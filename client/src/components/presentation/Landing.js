@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Hero from './Hero';
 import Details from './Details';
+import Services from './Services';
+import Footer from './Footer';
 
 const Landing = () => {
 
@@ -14,13 +16,10 @@ const Landing = () => {
 
 		<Details />
 
-		<section id='about'>
-		  <h2> About the Workshop </h2>
-		  <div className='about-item'>
-		    <p>Shop Hours </p>
-			<p>Contact </p>
-		  </div>
-		</section>
+		<Services />
+
+		<Footer />
+
 	  </div>
 
 	</>
